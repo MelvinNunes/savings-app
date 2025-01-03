@@ -1,42 +1,42 @@
 {
   "auth": {
-    "title": "Bem-vindo ao Desafio de Poupança",
-    "description": "Entre para salvar e acompanhar seu progresso",
-    "signInWithEmail": "Entrar com Email",
-    "signUpWithEmail": "Cadastrar com Email",
-    "continueWithGoogle": "Continuar com Google",
-    "orContinueWith": "Ou continue com",
+    "title": "Welcome to Savings Challenge",
+    "description": "Sign in to save and track your progress",
+    "signInWithEmail": "Sign In with Email",
+    "signUpWithEmail": "Sign Up with Email",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueWith": "Or continue with",
     "email": "Email",
-    "password": "Senha",
-    "checkEmail": "Verifique seu email para o link de confirmação."
+    "password": "Password",
+    "checkEmail": "Check your email for the confirmation link."
   },
   "savings": {
-    "title": "Desafio de Poupança 2025",
-    "subtitle": "Acompanhe sua jornada de poupança, mês a mês",
-    "signOut": "Sair",
-    "signInToSave": "Entre para Salvar Progresso",
+    "title": "2025 Savings Challenge",
+    "subtitle": "Track your savings journey, one month at a time",
+    "signOut": "Sign Out",
+    "signInToSave": "Sign In to Save Progress",
     "upgradeBanner": {
-      "text": "Quer salvar seu progresso e acessar de qualquer dispositivo? Crie uma conta gratuita!",
-      "button": "Atualize Gratuitamente"
+      "text": "Want to save your progress and access from any device? Create a free account!",
+      "button": "Upgrade for Free"
     },
     "insights": {
-      "totalSaved": "Total Poupado",
-      "monthlyProgress": "Progresso Mensal",
-      "nextTarget": "Próxima Meta",
-      "averageSavings": "Média de Poupança",
-      "onTrack": "Você está no caminho! 🎉",
-      "keepPushing": "Continue se esforçando! 💪",
-      "increasePerMonth": "aumento por mês",
-      "perCompletedMonth": "Por mês completado",
-      "ofYearlyGoal": "da meta anual"
+      "totalSaved": "Total Saved",
+      "monthlyProgress": "Monthly Progress",
+      "nextTarget": "Next Target",
+      "averageSavings": "Average Savings",
+      "onTrack": "You're on track! 🎉",
+      "keepPushing": "Keep pushing! 💪",
+      "increasePerMonth": "increase per month",
+      "perCompletedMonth": "Per completed month",
+      "ofYearlyGoal": "of yearly goal"
     },
     "plan": {
-      "title": "Plano de Poupança Mensal",
-      "description": "Acompanhe seu progresso e marque os meses completados",
-      "baseAmount": "Valor Base",
-      "currency": "Moeda",
-      "progress": "Progresso",
-      "completed": "Completado!"
+      "title": "Monthly Savings Plan",
+      "description": "Track your progress and mark completed months",
+      "baseAmount": "Base Amount",
+      "currency": "Currency",
+      "progress": "Progress",
+      "completed": "Completed!"
     }
   }
 }

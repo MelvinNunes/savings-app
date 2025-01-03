@@ -79,16 +79,7 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
 
     return (
         <Card className="w-full max-w-md mx-auto">
-            <CardHeader className="space-y-4">
-                <div className="flex justify-between items-center">
-                    <CardTitle>{dict.auth.title}</CardTitle>
-                    <LanguageSwitcher currentLang={lang} />
-                </div>
-                <CardDescription>
-                    {dict.auth.description}
-                </CardDescription>
-            </CardHeader>
-            <CardContent className="space-y-4">
+            <CardContent className="space-y-4 mt-5">
                 <Tabs defaultValue="login" className="space-y-4">
                     <TabsList className="grid w-full grid-cols-2">
                         <TabsTrigger value="login">{dict.auth.signInWithEmail}</TabsTrigger>

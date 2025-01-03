@@ -9,6 +9,7 @@ export async function getSession() {
     } = await supabase.auth.getSession();
     return session;
   } catch (error) {
+    console.log(error);
     return null;
   }
 }

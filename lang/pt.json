@@ -2,8 +2,8 @@
   "auth": {
     "title": "Bem-vindo ao Desafio de Poupança",
     "description": "Entre para salvar e acompanhar seu progresso",
-    "signInWithEmail": "Entrar com Email",
-    "signUpWithEmail": "Cadastrar com Email",
+    "signInWithEmail": "Entrar",
+    "signUpWithEmail": "Registrar",
     "continueWithGoogle": "Continuar com Google",
     "orContinueWith": "Ou continue com",
     "email": "Email",
