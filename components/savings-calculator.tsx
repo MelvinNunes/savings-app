@@ -32,7 +32,7 @@ export default function SavingsCalculator({ isAuthenticated, lang, dict }: Savin
     const [baseAmount, setBaseAmount] = useState<number>(200)
     const [currencyCode, setCurrencyCode] = useState<string>('MZN')
     const [monthlySavings, setMonthlySavings] = useState<MonthlyTarget[]>(
-        calculateMonthlySavings(200)
+        calculateMonthlySavings(200, dict)
     )
     const [showConfetti, setShowConfetti] = useState(false)
     const supabase = createClientComponentClient()
@@ -74,7 +74,7 @@ export default function SavingsCalculator({ isAuthenticated, lang, dict }: Savin
         const amount = Number(value)
         if (!isNaN(amount) && amount > 0) {
             setBaseAmount(amount)
-            setMonthlySavings(calculateMonthlySavings(amount))
+            setMonthlySavings(calculateMonthlySavings(amount, dict))
         }
     }
 

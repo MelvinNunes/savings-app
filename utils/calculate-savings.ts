@@ -1,19 +1,22 @@
 import { MonthlyTarget } from "../types/savings";
 
-export function calculateMonthlySavings(baseAmount: number): MonthlyTarget[] {
+export function calculateMonthlySavings(
+  baseAmount: number,
+  dict: any
+): MonthlyTarget[] {
   const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
+    dict.months.january,
+    dict.months.february,
+    dict.months.march,
+    dict.months.april,
+    dict.months.may,
+    dict.months.june,
+    dict.months.july,
+    dict.months.august,
+    dict.months.september,
+    dict.months.october,
+    dict.months.november,
+    dict.months.december,
   ];
 
   return months.map((month, index) => {
