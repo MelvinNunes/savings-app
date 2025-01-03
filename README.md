@@ -1,96 +1,193 @@
-<a href="https://demo-nextjs-with-supabase.vercel.app/">
-  <img alt="Next.js and Supabase Starter Kit - the fastest way to build apps with Next.js and Supabase" src="https://demo-nextjs-with-supabase.vercel.app/opengraph-image.png">
-  <h1 align="center">Next.js and Supabase Starter Kit</h1>
-</a>
+# MZN Savings Challenge Dashboard
 
-<p align="center">
- The fastest way to build apps with Next.js and Supabase
-</p>
-
-<p align="center">
-  <a href="#features"><strong>Features</strong></a> ·
-  <a href="#demo"><strong>Demo</strong></a> ·
-  <a href="#deploy-to-vercel"><strong>Deploy to Vercel</strong></a> ·
-  <a href="#clone-and-run-locally"><strong>Clone and run locally</strong></a> ·
-  <a href="#feedback-and-issues"><strong>Feedback and issues</strong></a>
-  <a href="#more-supabase-examples"><strong>More Examples</strong></a>
-</p>
-<br/>
+A Next.js application that visualizes savings and investment tracking data for the MZN Savings Challenge 2025. The dashboard provides interactive visualizations and analysis of different savings categories including base savings, individual/couple tracking, and investment growth, with data persistence using Supabase and full internationalization support.
 
 ## Features
 
-- Works across the entire [Next.js](https://nextjs.org) stack
-  - App Router
-  - Pages Router
-  - Middleware
-  - Client
-  - Server
-  - It just works!
-- supabase-ssr. A package to configure Supabase Auth to use cookies
-- Styling with [Tailwind CSS](https://tailwindcss.com)
-- Components with [shadcn/ui](https://ui.shadcn.com/)
-- Optional deployment with [Supabase Vercel Integration and Vercel deploy](#deploy-your-own)
-  - Environment variables automatically assigned to Vercel project
+- Multiple savings category tracking
+- Monthly progress visualization
+- Comparative analysis between different saving goals
+- Responsive design for all devices
+- Interactive data visualization components
+- Real-time data synchronization with Supabase
+- Secure authentication and data management
+- Internationalization support:
+  - English (default)
+  - Portuguese
+  - More languages planned for future releases
 
-## Demo
+## Technologies Used
 
-You can view a fully working demo at [demo-nextjs-with-supabase.vercel.app](https://demo-nextjs-with-supabase.vercel.app/).
+- Next.js
+- React
+- Tailwind CSS
+- Recharts for data visualization
+- TypeScript (optional)
+- Shadcn/UI components
+- Supabase for:
+  - Authentication
+  - Database
+  - Real-time subscriptions
+  - Row Level Security
+- next-intl for internationalization
 
-## Deploy to Vercel
+## Getting Started
 
-Vercel deployment will guide you through creating a Supabase account and project.
+### Prerequisites
 
-After installation of the Supabase integration, all relevant environment variables will be assigned to the project so the deployment is fully functioning.
+- Node.js 16.8 or later
+- npm or yarn package manager
+- Supabase account
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&project-name=nextjs-with-supabase&repository-name=nextjs-with-supabase&demo-title=nextjs-with-supabase&demo-description=This+starter+configures+Supabase+Auth+to+use+cookies%2C+making+the+user%27s+session+available+throughout+the+entire+Next.js+app+-+Client+Components%2C+Server+Components%2C+Route+Handlers%2C+Server+Actions+and+Middleware.&demo-url=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2F&external-id=https%3A%2F%2Fgithub.com%2Fvercel%2Fnext.js%2Ftree%2Fcanary%2Fexamples%2Fwith-supabase&demo-image=https%3A%2F%2Fdemo-nextjs-with-supabase.vercel.app%2Fopengraph-image.png)
+### Installation
 
-The above will also clone the Starter kit to your GitHub, you can clone that locally and develop locally.
+1. Clone the repository
 
-If you wish to just develop locally and not deploy to Vercel, [follow the steps below](#clone-and-run-locally).
+```bash
+git clone https://github.com/MelvinNunes/savings-web
+```
 
-## Clone and run locally
+2. Install dependencies
 
-1. You'll first need a Supabase project which can be made [via the Supabase dashboard](https://database.new)
+```bash
+cd savings-web
+npm install
+# or
+yarn install (recommended)
+```
 
-2. Create a Next.js app using the Supabase Starter template npx command
+3. Set up Supabase
 
-   ```bash
-   npx create-next-app -e with-supabase
-   ```
+- Create a new project in Supabase
+- Copy your project URL and anon key
+- Create a `.env.local` file in the root directory with:
 
-3. Use `cd` to change into the app's directory
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
 
-   ```bash
-   cd name-of-new-app
-   ```
+4. Run the development server
 
-4. Rename `.env.example` to `.env.local` and update the following:
+```bash
+npm run dev
+# or
+yarn dev (recommended)
+```
 
-   ```
-   NEXT_PUBLIC_SUPABASE_URL=[INSERT SUPABASE PROJECT URL]
-   NEXT_PUBLIC_SUPABASE_ANON_KEY=[INSERT SUPABASE PROJECT API ANON KEY]
-   ```
+5. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-   Both `NEXT_PUBLIC_SUPABASE_URL` and `NEXT_PUBLIC_SUPABASE_ANON_KEY` can be found in [your Supabase project's API settings](https://app.supabase.com/project/_/settings/api)
+## Project Structure
 
-5. You can now run the Next.js local development server:
+```
+savings-web/
+├── app/
+│   ├── layout.tsx
+│   └── page.tsx
+├── components/
+│   ├── charts/
+│   ├── ui/
+│   └── layout/
+├── lang/
+│   ├── en.json
+│   └── pt.json
+├── lib/
+│   ├── utils.ts
+│   └── supabase.ts
+├── middleware.ts
+├── public/
+```
 
-   ```bash
-   npm run dev
-   ```
+## Internationalization
 
-   The starter kit should now be running on [localhost:3000](http://localhost:3000/).
+The app uses `next-intl` for internationalization support. Language files are stored in the `messages` directory.
 
-6. This template comes with the default shadcn/ui style initialized. If you instead want other ui.shadcn styles, delete `components.json` and [re-install shadcn/ui](https://ui.shadcn.com/docs/installation/next)
+### Available Languages
 
-> Check out [the docs for Local Development](https://supabase.com/docs/guides/getting-started/local-development) to also run Supabase locally.
+- English (en) - Default
+- Portuguese (pt)
 
-## Feedback and issues
+### Adding New Translations
 
-Please file feedback and issues over on the [Supabase GitHub org](https://github.com/supabase/supabase/issues/new/choose).
+1. Create a new JSON file in the `messages` directory for your language (e.g., `es.json` for Spanish)
+2. Copy the structure from `en.json` and translate the values
+3. Update the middleware configuration to include the new locale
 
-## More Supabase examples
+Example translation file structure:
 
-- [Next.js Subscription Payments Starter](https://github.com/vercel/nextjs-subscription-payments)
-- [Cookie-based Auth and the Next.js 13 App Router (free course)](https://youtube.com/playlist?list=PL5S4mPUpp4OtMhpnp93EFSo42iQ40XjbF)
-- [Supabase Auth and the Next.js App Router](https://github.com/supabase/supabase/tree/master/examples/auth/nextjs)
+```json
+{
+  "navigation": {
+    "home": "Home",
+    "dashboard": "Dashboard",
+    "settings": "Settings"
+  },
+  "savings": {
+    "title": "Savings Dashboard",
+    "totalSaved": "Total Saved"
+  }
+}
+```
+
+## Database Schema
+
+```sql
+-- Example Supabase schema
+CREATE TABLE savings (
+  id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
+  user_id UUID REFERENCES auth.users(id),
+  month VARCHAR(255),
+  amount DECIMAL(10,2),
+  category VARCHAR(255),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now())
+);
+
+-- Enable Row Level Security
+ALTER TABLE savings ENABLE ROW LEVEL SECURITY;
+
+-- Create policies
+CREATE POLICY "Users can view their own savings"
+  ON savings FOR SELECT
+  USING (auth.uid() = user_id);
+
+CREATE POLICY "Users can insert their own savings"
+  ON savings FOR INSERT
+  WITH CHECK (auth.uid() = user_id);
+```
+
+## Data Structure
+
+The application handles four main categories of savings data:
+
+1. Base MZN tracking (800/1250)
+2. Individual/Couple savings
+3. Saving goals (750/1000)
+4. Investment tracking (200/300)
+
+## Environment Variables
+
+Rename `.env.example` to `.env.local` and update the following:
+
+```env
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+```
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
+3. Commit your changes (`git commit -m 'feat: Add some AmazingFeature'`)
+4. Push to the branch (`git push origin feature/AmazingFeature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE.md file for details
+
+## Acknowledgments
+
+- Based on the MZN Savings Challenge 2025
+- Inspired by personal finance tracking needs
+- UI components from Shadcn/UI library
+- Powered by Supabase backend services
