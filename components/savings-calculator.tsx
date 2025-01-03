@@ -17,6 +17,7 @@ import { CurrencySelector } from './currency-selector'
 import { formatCurrency } from '../utils/format-currency'
 import { LanguageSwitcher } from './language-switcher'
 import { UpgradeBanner } from './upgrade-banner'
+import { ThemeSwitcher } from './theme-switcher'
 
 interface SavingsCalculatorProps {
     isAuthenticated: boolean
@@ -157,7 +158,10 @@ export default function SavingsCalculator({ isAuthenticated, lang, dict }: Savin
                         <h1 className="text-3xl font-bold mb-2">{dict.savings.title}</h1>
                         <p className="text-white/80">{dict.savings.subtitle}</p>
                     </div>
-                    <LanguageSwitcher currentLang={lang} />
+                    <div className='flex justify-between gap-3'>
+                        <LanguageSwitcher currentLang={lang} />
+                        <ThemeSwitcher />
+                    </div>
                 </div>
             </div>
 
