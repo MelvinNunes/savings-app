@@ -1,7 +1,5 @@
 import { Geist } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import I18nProvider from '@/components/i18n-provider';
-import i18n from '@/lang/i18n';
 import "./globals.css";
 
 const defaultUrl = process.env.VERCEL_URL
