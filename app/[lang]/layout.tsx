@@ -9,10 +9,8 @@ export async function generateStaticParams() {
 
 export default function RootLayout({
     children,
-    params,
 }: {
     children: React.ReactNode;
-    params: { lang: string };
 }) {
     return (
         <div className={inter.className}>{children}</div>
