@@ -1,0 +1,42 @@
+{
+  "auth": {
+    "title": "Bem-vindo ao Desafio de Poupança",
+    "description": "Entre para salvar e acompanhar seu progresso",
+    "signInWithEmail": "Entrar com Email",
+    "signUpWithEmail": "Cadastrar com Email",
+    "continueWithGoogle": "Continuar com Google",
+    "orContinueWith": "Ou continue com",
+    "email": "Email",
+    "password": "Senha",
+    "checkEmail": "Verifique seu email para o link de confirmação."
+  },
+  "savings": {
+    "title": "Desafio de Poupança 2025",
+    "subtitle": "Acompanhe sua jornada de poupança, mês a mês",
+    "signOut": "Sair",
+    "signInToSave": "Entre para Salvar Progresso",
+    "upgradeBanner": {
+      "text": "Quer salvar seu progresso e acessar de qualquer dispositivo? Crie uma conta gratuita!",
+      "button": "Atualize Gratuitamente"
+    },
+    "insights": {
+      "totalSaved": "Total Poupado",
+      "monthlyProgress": "Progresso Mensal",
+      "nextTarget": "Próxima Meta",
+      "averageSavings": "Média de Poupança",
+      "onTrack": "Você está no caminho! 🎉",
+      "keepPushing": "Continue se esforçando! 💪",
+      "increasePerMonth": "aumento por mês",
+      "perCompletedMonth": "Por mês completado",
+      "ofYearlyGoal": "da meta anual"
+    },
+    "plan": {
+      "title": "Plano de Poupança Mensal",
+      "description": "Acompanhe seu progresso e marque os meses completados",
+      "baseAmount": "Valor Base",
+      "currency": "Moeda",
+      "progress": "Progresso",
+      "completed": "Completado!"
+    }
+  }
+}
