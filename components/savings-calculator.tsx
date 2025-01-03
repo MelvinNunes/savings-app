@@ -5,24 +5,29 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { calculateMonthlySavings, calculateYearTotal } from '../utils/calculate-savings'
-import { MonthlyTarget, CURRENCIES } from '../types/savings'
+import { MonthlyTarget, Currency, CURRENCIES } from '../types/savings'
+import { Progress } from '@/components/ui/progress'
 import { InsightsCard } from './insights-card'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Button } from './ui/button'
 import { Icons } from './icons'
 import { Alert, AlertDescription } from './ui/alert'
-import Link from 'next/link'
 import { Confetti } from './confetti'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import { CurrencySelector } from './currency-selector'
 import { formatCurrency } from '../utils/format-currency'
+import Link from 'next/link'
+import { LanguageSwitcher } from './language-switcher'
+import { UpgradeBanner } from './upgrade-banner'
 
 interface SavingsCalculatorProps {
     isAuthenticated: boolean
+    lang: string
+    dict: any
 }
 
-export default function SavingsCalculator({ isAuthenticated }: SavingsCalculatorProps) {
+export default function SavingsCalculator({ isAuthenticated, lang, dict }: SavingsCalculatorProps) {
     const [isLoading, setIsLoading] = useState(isAuthenticated)
     const [isSaving, setIsSaving] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -96,6 +101,7 @@ export default function SavingsCalculator({ isAuthenticated }: SavingsCalculator
                 setTimeout(() => setShowConfetti(false), 3000)
             }
 
+            // Only attempt to save to Supabase if authenticated
             if (isAuthenticated) {
                 const { data: { user } } = await supabase.auth.getUser()
                 if (!user) throw new Error('User not found')
@@ -113,10 +119,13 @@ export default function SavingsCalculator({ isAuthenticated }: SavingsCalculator
                 if (error) throw error
             }
 
+            // Always update local state
             setMonthlySavings(newSavings)
         } catch (err) {
             console.error('Error saving progress:', err)
-            setError('Failed to save progress. Please try again.')
+            if (isAuthenticated) {
+                setError('Failed to save progress. Please try again.')
+            }
         } finally {
             setIsSaving(false)
         }
@@ -142,46 +151,26 @@ export default function SavingsCalculator({ isAuthenticated }: SavingsCalculator
     }
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 pb-24">
             {showConfetti && <Confetti />}
 
             <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-8 text-white">
                 <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" />
-                <div className="relative flex justify-between items-center">
+                <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
-                        <h1 className="text-3xl font-bold mb-2">2025 Savings Challenge</h1>
-                        <p className="text-white/80">Track your savings journey, one month at a time</p>
+                        <h1 className="text-3xl font-bold mb-2">{dict.savings.title}</h1>
+                        <p className="text-white/80">{dict.savings.subtitle}</p>
                     </div>
-                    {isAuthenticated ? (
-                        <Button variant="secondary" onClick={handleSignOut}>
-                            Sign Out
-                        </Button>
-                    ) : (
-                        <Button variant="secondary" asChild>
-                            <Link href="/">Sign In to Save Progress</Link>
-                        </Button>
-                    )}
+                    <LanguageSwitcher currentLang={lang} />
                 </div>
             </div>
-
-            {!isAuthenticated && (
-                <Alert className="bg-gradient-to-r from-amber-50 to-amber-100 border-amber-200">
-                    <Sparkles className="h-4 w-4 text-amber-600" />
-                    <AlertDescription className="text-amber-900">
-                        You're using the basic version. Your progress won't be saved when you leave.{' '}
-                        <Link href="/" className="font-medium text-amber-700 hover:text-amber-900 underline underline-offset-4">
-                            Sign in
-                        </Link>
-                        {' '}to save your progress across devices.
-                    </AlertDescription>
-                </Alert>
-            )}
 
             <InsightsCard
                 monthlySavings={monthlySavings}
                 baseAmount={baseAmount}
                 yearTotal={yearTotal}
                 currency={currency}
+                dict={dict}
             />
 
             {error && (
@@ -193,15 +182,15 @@ export default function SavingsCalculator({ isAuthenticated }: SavingsCalculator
             <Card className="overflow-hidden border-0 shadow-lg bg-white">
                 <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-indigo-500/10 pointer-events-none" />
                 <CardHeader>
-                    <CardTitle>Monthly Savings Plan</CardTitle>
+                    <CardTitle>{dict.savings.plan.title}</CardTitle>
                     <CardDescription>
-                        Track your progress and mark completed months
+                        {dict.savings.plan.description}
                     </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-6">
                     <div className="flex flex-col sm:flex-row gap-4">
                         <div className="space-y-2">
-                            <Label htmlFor="baseAmount">Base Amount</Label>
+                            <Label htmlFor="baseAmount">{dict.savings.plan.baseAmount}</Label>
                             <Input
                                 id="baseAmount"
                                 type="number"
@@ -212,7 +201,7 @@ export default function SavingsCalculator({ isAuthenticated }: SavingsCalculator
                             />
                         </div>
                         <div className="space-y-2">
-                            <Label>Currency</Label>
+                            <Label>{dict.savings.plan.currency}</Label>
                             <CurrencySelector
                                 value={currencyCode}
                                 onValueChange={handleCurrencyChange}
@@ -222,7 +211,7 @@ export default function SavingsCalculator({ isAuthenticated }: SavingsCalculator
 
                     <div className="space-y-2">
                         <div className="flex justify-between text-sm">
-                            <span>Progress</span>
+                            <span>{dict.savings.plan.progress}</span>
                             <span>
                                 {formatCurrency(totalSaved, currency)} / {formatCurrency(yearTotal, currency)}
                             </span>
@@ -248,7 +237,7 @@ export default function SavingsCalculator({ isAuthenticated }: SavingsCalculator
                                 >
                                     <Card
                                         className={`cursor-pointer transition-all duration-300 hover:scale-105 ${saving.isCompleted ? 'bg-gradient-to-r from-violet-500/10 to-indigo-500/10 border-violet-200' : ''
-                                            } ${isSaving ? 'opacity-50 pointer-events-none' : ''}`}
+                                            }`}
                                         onClick={() => toggleMonthCompletion(index)}
                                     >
                                         <CardContent className="p-4">
@@ -261,7 +250,7 @@ export default function SavingsCalculator({ isAuthenticated }: SavingsCalculator
                                             {saving.isCompleted && (
                                                 <div className="mt-2 text-xs text-violet-600 flex items-center gap-1">
                                                     <Sparkles className="h-3 w-3" />
-                                                    Completed!
+                                                    {dict.savings.plan.completed}
                                                 </div>
                                             )}
                                         </CardContent>
@@ -272,6 +261,8 @@ export default function SavingsCalculator({ isAuthenticated }: SavingsCalculator
                     </div>
                 </CardContent>
             </Card>
+
+            {!isAuthenticated && <UpgradeBanner lang={lang} dict={dict} />}
         </div>
     )
 }
