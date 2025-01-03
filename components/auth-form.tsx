@@ -6,11 +6,17 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Icons } from './icons'
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
+import { LanguageSwitcher } from './language-switcher'
 
-export function AuthForm() {
+interface AuthFormProps {
+    lang: string
+    dict: any
+}
+
+export function AuthForm({ lang, dict }: AuthFormProps) {
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [email, setEmail] = useState('')
@@ -49,7 +55,7 @@ export function AuthForm() {
         if (error) {
             setError(error.message)
         } else {
-            setError('Check your email for the confirmation link.')
+            setError(dict.auth.checkEmail)
         }
         setIsLoading(false)
     }
@@ -73,22 +79,25 @@ export function AuthForm() {
 
     return (
         <Card className="w-full max-w-md mx-auto">
-            <CardHeader>
-                <CardTitle>Welcome to Savings Challenge</CardTitle>
+            <CardHeader className="space-y-4">
+                <div className="flex justify-between items-center">
+                    <CardTitle>{dict.auth.title}</CardTitle>
+                    <LanguageSwitcher currentLang={lang} />
+                </div>
                 <CardDescription>
-                    Sign in to save and track your progress
+                    {dict.auth.description}
                 </CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
                 <Tabs defaultValue="login" className="space-y-4">
                     <TabsList className="grid w-full grid-cols-2">
-                        <TabsTrigger value="login">Login</TabsTrigger>
-                        <TabsTrigger value="register">Register</TabsTrigger>
+                        <TabsTrigger value="login">{dict.auth.signInWithEmail}</TabsTrigger>
+                        <TabsTrigger value="register">{dict.auth.signUpWithEmail}</TabsTrigger>
                     </TabsList>
                     <TabsContent value="login">
                         <form onSubmit={handleEmailLogin} className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="email">Email</Label>
+                                <Label htmlFor="email">{dict.auth.email}</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -98,7 +107,7 @@ export function AuthForm() {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="password">{dict.auth.password}</Label>
                                 <Input
                                     id="password"
                                     type="password"
@@ -111,14 +120,14 @@ export function AuthForm() {
                                 {isLoading ? (
                                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                                 ) : null}
-                                Sign In with Email
+                                {dict.auth.signInWithEmail}
                             </Button>
                         </form>
                     </TabsContent>
                     <TabsContent value="register">
                         <form onSubmit={handleEmailSignUp} className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="email">Email</Label>
+                                <Label htmlFor="email">{dict.auth.email}</Label>
                                 <Input
                                     id="email"
                                     type="email"
@@ -128,7 +137,7 @@ export function AuthForm() {
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="password">Password</Label>
+                                <Label htmlFor="password">{dict.auth.password}</Label>
                                 <Input
                                     id="password"
                                     type="password"
@@ -141,7 +150,7 @@ export function AuthForm() {
                                 {isLoading ? (
                                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                                 ) : null}
-                                Sign Up with Email
+                                {dict.auth.signUpWithEmail}
                             </Button>
                         </form>
                     </TabsContent>
@@ -159,7 +168,7 @@ export function AuthForm() {
                     </div>
                     <div className="relative flex justify-center text-xs uppercase">
                         <span className="bg-background px-2 text-muted-foreground">
-                            Or continue with
+                            {dict.auth.orContinueWith}
                         </span>
                     </div>
                 </div>
@@ -176,7 +185,7 @@ export function AuthForm() {
                     ) : (
                         <Icons.google className="mr-2 h-4 w-4" />
                     )}
-                    Google
+                    {dict.auth.continueWithGoogle}
                 </Button>
             </CardContent>
         </Card>

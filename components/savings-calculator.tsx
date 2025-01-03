@@ -155,7 +155,6 @@ export default function SavingsCalculator({ isAuthenticated, lang, dict }: Savin
             {showConfetti && <Confetti />}
 
             <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-8 text-white">
-                <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" />
                 <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                     <div>
                         <h1 className="text-3xl font-bold mb-2">{dict.savings.title}</h1>

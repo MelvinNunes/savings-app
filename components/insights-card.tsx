@@ -9,9 +9,10 @@ interface InsightsCardProps {
   baseAmount: number
   yearTotal: number
   currency: Currency
+  dict: any
 }
 
-export function InsightsCard({ monthlySavings, baseAmount, yearTotal, currency }: InsightsCardProps) {
+export function InsightsCard({ monthlySavings, baseAmount, yearTotal, currency, dict }: InsightsCardProps) {
   const completedMonths = monthlySavings.filter(m => m.isCompleted).length
   const totalSaved = monthlySavings
     .filter(m => m.isCompleted)
