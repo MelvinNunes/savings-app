@@ -5,11 +5,9 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { calculateMonthlySavings, calculateYearTotal } from '../utils/calculate-savings'
-import { MonthlyTarget, Currency, CURRENCIES } from '../types/savings'
-import { Progress } from '@/components/ui/progress'
+import { MonthlyTarget, CURRENCIES } from '../types/savings'
 import { InsightsCard } from './insights-card'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { Button } from './ui/button'
 import { Icons } from './icons'
 import { Alert, AlertDescription } from './ui/alert'
 import { Confetti } from './confetti'
@@ -17,7 +15,6 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkles } from 'lucide-react'
 import { CurrencySelector } from './currency-selector'
 import { formatCurrency } from '../utils/format-currency'
-import Link from 'next/link'
 import { LanguageSwitcher } from './language-switcher'
 import { UpgradeBanner } from './upgrade-banner'
 
@@ -29,7 +26,7 @@ interface SavingsCalculatorProps {
 
 export default function SavingsCalculator({ isAuthenticated, lang, dict }: SavingsCalculatorProps) {
     const [isLoading, setIsLoading] = useState(isAuthenticated)
-    const [isSaving, setIsSaving] = useState(false)
+    const [, setIsSaving] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [baseAmount, setBaseAmount] = useState<number>(200)
     const [currencyCode, setCurrencyCode] = useState<string>('MZN')
@@ -179,7 +176,6 @@ export default function SavingsCalculator({ isAuthenticated, lang, dict }: Savin
             )}
 
             <Card className="overflow-hidden border-0 shadow-lg bg-white">
-                <div className="absolute inset-0 bg-gradient-to-r from-violet-500/10 to-indigo-500/10 pointer-events-none" />
                 <CardHeader>
                     <CardTitle>{dict.savings.plan.title}</CardTitle>
                     <CardDescription>

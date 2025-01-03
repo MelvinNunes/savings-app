@@ -26,30 +26,30 @@ export function InsightsCard({ monthlySavings, baseAmount, yearTotal, currency, 
 
   const insights = [
     {
-      title: 'Total Saved',
+      title: dict.savings.insights.totalSaved,
       value: formatCurrency(totalSaved, currency),
-      subtitle: `${((totalSaved / yearTotal) * 100).toFixed(1)}% of yearly goal`,
+      subtitle: `${((totalSaved / yearTotal) * 100).toFixed(1)}% ${dict.savings.insights.ofYearlyGoal}`,
       icon: TrophyIcon,
       gradient: 'from-violet-600 to-indigo-600',
     },
     {
-      title: 'Monthly Progress',
+      title: dict.savings.insights.monthlyProgress,
       value: `${completedMonths}/12`,
-      subtitle: isOnTrack ? "You're on track! 🎉" : "Keep pushing! 💪",
+      subtitle: isOnTrack ? dict.savings.insights.onTrack : dict.savings.insights.keepPushing,
       icon: StarIcon,
       gradient: 'from-emerald-600 to-teal-600',
     },
     {
-      title: 'Next Target',
+      title: dict.savings.insights.nextTarget,
       value: formatCurrency(nextTarget, currency),
-      subtitle: `${formatCurrency(baseAmount, currency)} increase per month`,
+      subtitle: `${formatCurrency(baseAmount, currency)} ${dict.savings.insights.increasePerMonth}`,
       icon: SparklesIcon,
       gradient: 'from-amber-600 to-orange-600',
     },
     {
-      title: 'Average Savings',
+      title: dict.savings.insights.averageSavings,
       value: formatCurrency(averageSaved, currency),
-      subtitle: 'Per completed month',
+      subtitle: dict.savings.insights.perCompletedMonth,
       icon: ArrowTrendingUpIcon,
       gradient: 'from-pink-600 to-rose-600',
     },
@@ -65,7 +65,6 @@ export function InsightsCard({ monthlySavings, baseAmount, yearTotal, currency, 
           transition={{ delay: index * 0.1 }}
         >
           <Card className="overflow-hidden">
-            <div className={`absolute inset-0 bg-gradient-to-r ${insight.gradient} opacity-[0.08]`} />
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{insight.title}</CardTitle>
               <insight.icon className={`h-4 w-4 bg-gradient-to-r ${insight.gradient} [&>path]:fill-white`} />
