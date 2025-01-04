@@ -170,18 +170,7 @@ export default function SavingsCalculator({ lang, dict }: SavingsCalculatorProps
         <div className="space-y-6 pb-24">
             {showConfetti && <Confetti />}
 
-            <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 p-8 text-white">
-                <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div>
-                        <h1 className="text-3xl font-bold mb-2">{dict.savings.title}</h1>
-                        <p className="text-white/80">{dict.savings.subtitle}</p>
-                    </div>
-                    <div className='flex justify-between gap-3'>
-                        <LanguageSwitcher currentLang={lang} />
-                        <ThemeSwitcher />
-                    </div>
-                </div>
-            </div>
+            <SavingsHeader dict={dict} lang={lang} />
 
             <InsightsCard
                 monthlySavings={monthlySavings}
@@ -197,7 +186,7 @@ export default function SavingsCalculator({ lang, dict }: SavingsCalculatorProps
                 </Alert>
             )}
 
-            <Card className="overflow-hidden border-0 shadow-lg bg-white">
+            <Card className="overflow-hidden border-0 shadow-lg bg-white dark:bg-slate-800">
                 <CardHeader>
                     <CardTitle>{dict.savings.plan.title}</CardTitle>
                     <CardDescription>
@@ -214,7 +203,7 @@ export default function SavingsCalculator({ lang, dict }: SavingsCalculatorProps
                                 min="1"
                                 value={baseAmount}
                                 onChange={(e) => handleBaseAmountChange(e.target.value)}
-                                className="max-w-xs"
+                                className="max-w-xs dark:bg-slate-900"
                             />
                         </div>
                         <div className="space-y-2">
@@ -284,3 +273,21 @@ export default function SavingsCalculator({ lang, dict }: SavingsCalculatorProps
     )
 }
 
+
+
+function SavingsHeader({ dict, lang }: { dict: any, lang: string }) {
+    return (
+        <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 dark:from-violet-900 to-indigo-600 dark:to-indigo-900 p-8 text-white dark:text-slate-200">
+            <div className="relative flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+                <div>
+                    <h1 className="text-3xl font-bold mb-2">{dict.savings.title}</h1>
+                    <p className="text-white/80">{dict.savings.subtitle}</p>
+                </div>
+                <div className='flex justify-between gap-3'>
+                    <LanguageSwitcher currentLang={lang} />
+                    <ThemeSwitcher />
+                </div>
+            </div>
+        </div>
+    )
+}

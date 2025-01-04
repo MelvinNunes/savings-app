@@ -9,7 +9,7 @@ interface CurrencySelectorProps {
 export function CurrencySelector({ value, onValueChange }: CurrencySelectorProps) {
     return (
         <Select value={value} onValueChange={onValueChange}>
-            <SelectTrigger className="w-[180px]">
+            <SelectTrigger className="w-[180px] dark:border-black">
                 <SelectValue placeholder="Select currency" />
             </SelectTrigger>
             <SelectContent>

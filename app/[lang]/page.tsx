@@ -12,7 +12,7 @@ export default async function Page({ params }: PageProps) {
     const dict = await getDictionary(lang)
 
     return (
-        <div className="min-h-screen bg-slate-100">
+        <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
             <div className="container py-10 space-y-8">
                 <SavingsCalculator lang={lang} dict={dict} />
             </div>

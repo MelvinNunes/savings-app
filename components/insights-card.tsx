@@ -64,7 +64,7 @@ export function InsightsCard({ monthlySavings, baseAmount, yearTotal, currency, 
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: index * 0.1 }}
         >
-          <Card className="overflow-hidden">
+          <Card className="overflow-hidden dark:bg-slate-800">
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{insight.title}</CardTitle>
               <insight.icon className={`h-4 w-4 bg-gradient-to-r ${insight.gradient} [&>path]:fill-white`} />

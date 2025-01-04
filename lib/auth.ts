@@ -14,8 +14,6 @@ export async function getUser() {
     const {
       data: { user },
     } = await supabase.auth.getUser(jwt);
-
-    console.log(user);
     return user;
   } catch (error) {
     return null;
