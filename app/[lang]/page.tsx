@@ -5,6 +5,7 @@ import SavingsCalculator from '@/components/savings-calculator';
 import { useAuthentication } from '@/lib/auth';
 import { useLocalization } from '@/lib/dictionary';
 import LoadingSpinner from '@/components/loading-spinner';
+import { Dashboard } from '@/components/dashboard';
 
 interface PageProps {
     params: Promise<{

@@ -12,6 +12,7 @@ import { CHALLENGE_TYPES } from '@/types/savings'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { Icons } from './icons'
+import { getUser } from '@/lib/auth'
 
 interface CreateChallengeDialogProps {
     open: boolean
@@ -35,7 +36,7 @@ export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChalle
         setIsLoading(true)
 
         try {
-            const { data: { user } } = await supabase.auth.getUser()
+            const user = await getUser()
             if (!user) throw new Error('Not authenticated')
 
             const challenge = {
