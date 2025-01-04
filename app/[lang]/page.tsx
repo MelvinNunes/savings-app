@@ -24,10 +24,10 @@ export default function Page({ params }: PageProps) {
     const { dictionary, error: dictionaryError } = useLocalization(lang);
     const { user, isLoading: authLoading } = useAuthentication();
     const [challenges, setChallenges] = useState<SavingsChallenge[]>([]);
-
+    const [isLoadingChallenges, setIsLoadingChallenges] = useState(true);
 
     useEffect(() => {
-        useGetAllUserChallenges().then(setChallenges);
+        useGetAllUserChallenges().then(setChallenges).finally(() => setIsLoadingChallenges(false));
     }, [user])
 
     if (authLoading || !dictionary || dictionaryError) {
@@ -44,6 +44,7 @@ export default function Page({ params }: PageProps) {
                     user ?
                         <Dashboard
                             challenges={challenges}
+                            isLoadingChallenges={isLoadingChallenges}
                             dict={dictionary}
                         /> :
                         <SavingsCalculator
