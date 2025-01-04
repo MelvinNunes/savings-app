@@ -1,7 +1,7 @@
 'use client'
 
 import { Dispatch, ForwardRefExoticComponent, RefAttributes, SetStateAction, useState } from 'react'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Archive, ArrowUpRight, CheckCircle2, Clock, LucideProps, PlusCircle, TrendingUp, Wallet } from 'lucide-react'
 import { SavingsChallenge } from '@/types/savings'

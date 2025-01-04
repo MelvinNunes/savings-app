@@ -2,10 +2,11 @@
 
 import { usePathname, useRouter } from 'next/navigation'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import Image from 'next/image'
 
 const languages = [
-    { code: 'en', name: 'English' },
-    { code: 'pt', name: 'Português' }
+    { code: 'en', name: 'English', flag: "https://flagcdn.com/gb.svg" },
+    { code: 'pt', name: 'Português', flag: "https://flagcdn.com/pt.svg" },
 ]
 
 export function LanguageSwitcher({ currentLang }: { currentLang: string }) {
@@ -24,8 +25,10 @@ export function LanguageSwitcher({ currentLang }: { currentLang: string }) {
             </SelectTrigger>
             <SelectContent>
                 {languages.map((lang) => (
-                    <SelectItem key={lang.code} value={lang.code}>
-                        {lang.name}
+                    <SelectItem key={lang.code} value={lang.code} >
+                        <div className='flex gap-2 items-center'>
+                            {lang.name} <Image src={lang.flag} alt="PT flag" width={20} height={20} />
+                        </div>
                     </SelectItem>
                 ))}
             </SelectContent>

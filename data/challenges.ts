@@ -19,8 +19,7 @@ export function useGetAllUserChallenges(): Promise<SavingsChallenge[]> {
       if (error) throw error;
       return data || [];
     })
-    .catch((error) => {
-      console.error("Error fetching challenges:", error);
+    .catch(() => {
       return [];
     });
 }

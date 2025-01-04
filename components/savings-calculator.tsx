@@ -21,6 +21,7 @@ import { ThemeSwitcher } from './theme-switcher'
 import { getUser } from '@/lib/auth'
 import { removeAuthToken } from '@/lib/token.utils'
 import LoadingSpinner from './loading-spinner'
+import Link from 'next/link'
 
 interface SavingsCalculatorProps {
     lang: string
@@ -156,6 +157,8 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
 
             <SavingsHeader dict={dict} lang={lang} />
 
+            {!isAuthenticated && <NotAuthAlert />}
+
             <InsightsCard
                 monthlySavings={monthlySavings}
                 baseAmount={baseAmount}
@@ -273,5 +276,20 @@ function SavingsHeader({ dict, lang }: { dict: any, lang: string }) {
                 </div>
             </div>
         </div>
+    )
+}
+
+function NotAuthAlert() {
+    return (
+        <Alert className="bg-gradient-to-r from-amber-50 to-amber-100 border-amber-200">
+            <Sparkles className="h-4 w-4 text-amber-600" />
+            <AlertDescription className="text-amber-900">
+                You're using the basic version. Your progress won't be saved when you leave.{' '}
+                <Link href="/" className="font-medium text-amber-700 hover:text-amber-900 underline underline-offset-4">
+                    Sign in
+                </Link>
+                {' '}to save your progress across devices.
+            </AlertDescription>
+        </Alert>
     )
 }
