@@ -55,6 +55,10 @@
       "currency": "Moeda",
       "progress": "Progresso",
       "completed": "Completado!"
+    },
+    "notAuth": {
+      "title": "Você está a utilizar a versão básica. Seu progresso não será salvo quando você sair.",
+      "save": "para salvar seu progresso em vários dispositivos."
     }
   },
   "months": {

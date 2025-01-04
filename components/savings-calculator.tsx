@@ -157,7 +157,7 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
 
             <SavingsHeader dict={dict} lang={lang} />
 
-            {!isAuthenticated && <NotAuthAlert />}
+            {!isAuthenticated && <NotAuthAlert dict={dict} />}
 
             <InsightsCard
                 monthlySavings={monthlySavings}
@@ -279,16 +279,16 @@ function SavingsHeader({ dict, lang }: { dict: any, lang: string }) {
     )
 }
 
-function NotAuthAlert() {
+function NotAuthAlert({ dict }: { dict: any }) {
     return (
         <Alert className="bg-gradient-to-r from-amber-50 to-amber-100 border-amber-200">
             <Sparkles className="h-4 w-4 text-amber-600" />
             <AlertDescription className="text-amber-900">
-                You're using the basic version. Your progress won't be saved when you leave.{' '}
+                {dict.savings.notAuth.title}{' '}
                 <Link href="/" className="font-medium text-amber-700 hover:text-amber-900 underline underline-offset-4">
-                    Sign in
+                    {dict.auth.signInWithEmail}
                 </Link>
-                {' '}to save your progress across devices.
+                {' '}{dict.savings.notAuth.save}
             </AlertDescription>
         </Alert>
     )
