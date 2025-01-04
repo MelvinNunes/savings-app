@@ -25,9 +25,12 @@ export interface SavingsChallenge {
 }
 
 export const CURRENCIES: Currency[] = [
+  { code: "MZN", symbol: "MZN", name: "Metical" },
   { code: "USD", symbol: "$", name: "US Dollar" },
   { code: "EUR", symbol: "€", name: "Euro" },
   { code: "GBP", symbol: "£", name: "British Pound" },
+  { code: "ZAR", symbol: "R", name: "South African Rand" },
+  { code: "AUD", symbol: "A$", name: "Australian Dollar" },
 ];
 
 export const CHALLENGE_TYPES = [
