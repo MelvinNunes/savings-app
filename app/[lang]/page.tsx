@@ -1,6 +1,6 @@
 'use client';
 
-import { use } from 'react';
+import { use, useEffect, useState } from 'react';
 import SavingsCalculator from '@/components/savings-calculator';
 import { useAuthentication } from '@/lib/auth';
 import { useLocalization } from '@/lib/dictionary';
@@ -9,6 +9,8 @@ import { Dashboard } from '@/components/dashboard';
 import Link from 'next/link';
 import { PiggyBank } from 'lucide-react';
 import { Header } from '@/components/header';
+import { SavingsChallenge } from '@/types/savings';
+import { useGetAllUserChallenges } from '@/data/challenges';
 
 interface PageProps {
     params: Promise<{
@@ -21,15 +23,18 @@ export default function Page({ params }: PageProps) {
     const { lang } = use(params);
     const { dictionary, error: dictionaryError } = useLocalization(lang);
     const { user, isLoading: authLoading } = useAuthentication();
+    const [challenges, setChallenges] = useState<SavingsChallenge[]>([]);
+
+
+    useEffect(() => {
+        useGetAllUserChallenges().then(setChallenges);
+    }, [user])
 
     if (authLoading || !dictionary || dictionaryError) {
         return (
             <LoadingSpinner />
         );
     }
-
-
-
 
     return (
         <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
@@ -38,7 +43,7 @@ export default function Page({ params }: PageProps) {
                 {
                     user ?
                         <Dashboard
-                            challenges={[]}
+                            challenges={challenges}
                             dict={dictionary}
                         /> :
                         <SavingsCalculator
