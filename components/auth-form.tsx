@@ -132,7 +132,7 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
                     </Alert>
                 )}
 
-                <div className="relative">
+                {/* <div className="relative">
                     <div className="absolute inset-0 flex items-center">
                         <span className="w-full border-t" />
                     </div>
@@ -141,7 +141,7 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
                             {dict.auth.orContinueWith}
                         </span>
                     </div>
-                </div>
+                </div> */}
             </CardContent>
         </Card>
     )
