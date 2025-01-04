@@ -35,14 +35,13 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
             setError(error.message)
         }
         setIsLoading(false)
-        // router.push(`/`)
+        router.push(`/`)
     }
 
     const handleEmailSignUp = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true)
         setError(null)
-
         const error = await loginWithPassword({
             email,
             password
@@ -53,7 +52,6 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
             setError(dict.auth.checkEmail)
         }
         setIsLoading(false)
-
         router.push(`/`)
     }
 
@@ -66,7 +64,6 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
             setError(error.message)
         }
         setIsLoading(false)
-
         router.push(`/`)
     }
 

@@ -151,6 +151,15 @@ export default function SavingsCalculator({ isAuthenticated, lang, dict }: Savin
         )
     }
 
+
+    const getAuthenticatedUser = async () => {
+        const user = await getUser()
+        return user
+    }
+
+
+    getAuthenticatedUser().then(user => console.log("user: ", user))
+
     return (
         <div className="space-y-6 pb-24">
             {showConfetti && <Confetti />}
