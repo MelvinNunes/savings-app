@@ -12,7 +12,7 @@ import Link from 'next/link'
 import { CURRENCIES } from '@/types/savings'
 import { Badge } from './ui/badge'
 import { Progress } from './ui/progress'
-import { QueryClient, QueryClientProvider } from 'react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 interface DashboardProps {
     dict: any
@@ -77,8 +77,6 @@ export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardPr
 
 function Header({ dict, setShowCreateDialog }: { dict: any, setShowCreateDialog: Dispatch<SetStateAction<boolean>> }) {
     return (
-
-
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 dark:from-violet-800 to-indigo-600 dark:to-indigo-800 px-8 py-12 text-white">
             <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" />
             <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -191,7 +189,7 @@ function Challenges({ dict, challenges, isLoading }: { dict: any, challenges: Sa
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                     >
-                        <Link href={`/challenge/${challenge.id}`}>
+                        <Link href={`#`}>
                             <Card className="cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1">
                                 <CardContent className="p-6">
                                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

@@ -1,56 +1,37 @@
-import { SavingsChallenge } from "@/types/savings";
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { supabaseClient } from "./client/supabase";
 
-export function useCreateChallenge(userId: string) {
-  const queryClient = useQueryClient();
-
-  const { isLoading, isError, mutate, isSuccess } = useMutation({
-    mutationFn: async (data: SavingsChallenge) => {
+export function useCreateChallenge() {
+  const { isPending, isError, mutate, isSuccess } = useMutation({
+    mutationFn: async (data: any) => {
       const res = await supabaseClient
         .from("savings_challenges")
-        .insert([{ ...data, user_id: userId }]);
+        .insert([{ ...data, user_id: data.user_id }])
+        .select("*");
       return res;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ["savings-challenges", userId],
-      });
+    onSuccess: (result: any) => {
+      // Get current data from cache
     },
   });
 
   return {
-    isLoading,
+    isPending,
     isSuccess,
     isError,
     createChallenge: mutate,
   };
 }
 
-export function useGetAllUserChallenges(userId: string, enabled: boolean) {
-  const { data, isLoading, isFetching } = useQuery({
-    queryKey: ["savings-challenges", userId],
-    queryFn: async () => {
-      if (!userId) {
-        return [];
-      }
+export async function useGetAllUserChallenges(userId: string) {
+  const { data, error } = await supabaseClient
+    .from("savings_challenges")
+    .select("*")
+    .eq("user_id", userId)
+    .order("createdAt", { ascending: false });
 
-      const { data, error } = await supabaseClient
-        .from("savings_challenges")
-        .select("*")
-        .eq("user_id", userId)
-        .order("createdAt", { ascending: false });
-
-      if (error) {
-        throw error;
-      }
-
-      return data || [];
-    },
-    initialData: [],
-    retry: 1,
-    refetchOnWindowFocus: true,
-    enabled: enabled,
-  });
-  return { data, isLoading, isFetching };
+  if (error) {
+    throw error;
+  }
+  return data || [];
 }

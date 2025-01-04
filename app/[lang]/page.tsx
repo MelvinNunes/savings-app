@@ -6,10 +6,7 @@ import { useAuthentication } from '@/lib/auth';
 import { useLocalization } from '@/lib/dictionary';
 import LoadingSpinner from '@/components/loading-spinner';
 import { Dashboard } from '@/components/dashboard';
-import Link from 'next/link';
-import { PiggyBank } from 'lucide-react';
 import { Header } from '@/components/header';
-import { SavingsChallenge } from '@/types/savings';
 import { useGetAllUserChallenges } from '@/data/challenges';
 
 interface PageProps {
@@ -23,14 +20,27 @@ export default function Page({ params }: PageProps) {
     const { lang } = use(params);
     const { dictionary, error: dictionaryError } = useLocalization(lang);
     const { user, isLoading: authLoading } = useAuthentication();
+    const [userChallenges, setUserChallenges] = useState<any[]>([]);
+    const [isLoadingUserChallenges, setIsLoadingUserChallenges] = useState(true);
 
-    const { data: userChallenges, isFetching: isLoadingUserChallenges } = useGetAllUserChallenges(user?.id || '', true);
+
+    useEffect(() => {
+        if (user) {
+            setIsLoadingUserChallenges(true);
+            useGetAllUserChallenges(user.id).then((challenges) => {
+                setUserChallenges(challenges);
+            }).finally(() => {
+                setIsLoadingUserChallenges(false);
+            });
+        }
+    }, [user]);
 
     if (authLoading || !dictionary || dictionaryError) {
         return (
             <LoadingSpinner />
         );
     }
+
 
     return (
         <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
@@ -39,7 +49,7 @@ export default function Page({ params }: PageProps) {
                 {
                     user ?
                         <Dashboard
-                            challenges={userChallenges || []}
+                            challenges={userChallenges}
                             isLoadingChallenges={isLoadingUserChallenges}
                             dict={dictionary}
                         /> :
