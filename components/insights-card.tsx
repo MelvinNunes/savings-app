@@ -28,7 +28,7 @@ export function InsightsCard({ monthlySavings, baseAmount, yearTotal, currency, 
     {
       title: dict.savings.insights.totalSaved,
       value: formatCurrency(totalSaved, currency),
-      subtitle: `${((totalSaved / yearTotal) * 100).toFixed(1)}% ${dict.savings.insights.ofYearlyGoal}`,
+      subtitle: `${isNaN(totalSaved / yearTotal) ? 0 : ((totalSaved / yearTotal) * 100).toFixed(1)}% ${dict.savings.insights.ofYearlyGoal}`,
       icon: TrophyIcon,
       gradient: 'from-violet-600 to-indigo-600',
     },

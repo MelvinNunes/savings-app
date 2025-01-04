@@ -8,10 +8,11 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { CurrencySelector } from './currency-selector'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useRouter } from 'next/navigation'
 import { Icons } from './icons'
 import { getUser } from '@/lib/auth'
+import { useCreateChallenge } from '@/data/challenges'
+import { useAtom } from 'jotai'
+import { addedChallengeCountAtom } from '@/atom/challenge-atoms'
 
 interface CreateChallengeDialogProps {
     open: boolean
@@ -19,7 +20,9 @@ interface CreateChallengeDialogProps {
     dict: any
 }
 
+
 export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChallengeDialogProps) {
+
     // to refactor, use zod
     const [isLoading, setIsLoading] = useState(false)
     const [name, setName] = useState('')
@@ -27,9 +30,9 @@ export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChalle
     const [baseAmount, setBaseAmount] = useState('200')
     const [currencyCode, setCurrencyCode] = useState('MZN')
     const [type, setType] = useState('incremental')
+    const [, setAddedChallengeCount] = useAtom(addedChallengeCountAtom)
 
-    const router = useRouter()
-    const supabase = createClientComponentClient()
+    const { createChallenge } = useCreateChallenge()
 
     const CHALLENGE_TYPES = [
         {
@@ -54,8 +57,8 @@ export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChalle
         setIsLoading(true)
 
         try {
-            const user = await getUser()
-            if (!user) throw new Error('Not authenticated')
+            const user = await getUser();
+            if (!user) throw new Error("Not authenticated");
 
             const challenge = {
                 name,
@@ -70,19 +73,20 @@ export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChalle
                     isCompleted: false
                 })),
                 createdAt: new Date().toISOString(),
-                updatedAt: new Date().toISOString()
+                updatedAt: new Date().toISOString(),
+                user_id: user.id
             }
 
-            const { error } = await supabase
-                .from('savings_challenges')
-                .insert([{ ...challenge, user_id: user.id }])
+            createChallenge(challenge, {
+                onSuccess: () => {
+                    setAddedChallengeCount((addedChallengeCount) => addedChallengeCount + 1)
+                }
+            })
 
-            if (error) throw error
 
-            router.refresh()
             onOpenChange(false)
-        } catch (error) {
-            console.error('Error creating challenge:', error)
+        } catch (err) {
+            console.error("Error creating challenge:", err);
         } finally {
             setIsLoading(false)
         }

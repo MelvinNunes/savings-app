@@ -68,15 +68,19 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
                 setMonthlySavings(data[0].progress as MonthlyTarget[])
             }
         } catch (err) {
-            console.error('Error loading progress:', err)
+            setIsLoading(false)
         } finally {
             setIsLoading(false)
         }
     }
 
     const handleBaseAmountChange = (value: string) => {
+        if (value === '') {
+            setBaseAmount(0);
+            return;
+        }
         const amount = Number(value)
-        if (!isNaN(amount) && amount > 0) {
+        if (!isNaN(amount)) {
             setBaseAmount(amount)
             setMonthlySavings(calculateMonthlySavings(amount, dict))
         }
@@ -133,9 +137,6 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
         }
     }
 
-    const handleSignOut = async () => {
-        await supabase.auth.signOut()
-    }
 
     const totalSaved = monthlySavings
         .filter(saving => saving.isCompleted)
@@ -186,7 +187,7 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
                                 id="baseAmount"
                                 type="number"
                                 min="1"
-                                value={baseAmount}
+                                value={baseAmount === 0 ? '' : baseAmount}
                                 onChange={(e) => handleBaseAmountChange(e.target.value)}
                                 className="max-w-xs dark:bg-slate-900"
                             />

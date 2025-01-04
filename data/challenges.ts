@@ -1,25 +1,34 @@
-import { getUser } from "@/lib/auth";
-import { SavingsChallenge } from "@/types/savings";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { supabaseClient } from "./client/supabase";
 
-export function useGetAllUserChallenges(): Promise<SavingsChallenge[]> {
-  const supabase = createClientComponentClient();
-
-  return getUser()
-    .then((user) => {
-      if (!user) throw new Error("Not authenticated");
-
-      return supabase
+export function useCreateChallenge() {
+  const { isPending, isError, mutate, isSuccess } = useMutation({
+    mutationFn: async (data: any) => {
+      const res = await supabaseClient
         .from("savings_challenges")
-        .select("*")
-        .eq("user_id", user.id)
-        .order("createdAt", { ascending: false });
-    })
-    .then(({ data, error }) => {
-      if (error) throw error;
-      return data || [];
-    })
-    .catch(() => {
-      return [];
-    });
+        .insert([{ ...data, user_id: data.user_id }])
+        .select("*");
+      return res;
+    },
+  });
+
+  return {
+    isPending,
+    isSuccess,
+    isError,
+    createChallenge: mutate,
+  };
+}
+
+export async function useGetAllUserChallenges(userId: string) {
+  const { data, error } = await supabaseClient
+    .from("savings_challenges")
+    .select("*")
+    .eq("user_id", userId)
+    .order("createdAt", { ascending: false });
+
+  if (error) {
+    throw error;
+  }
+  return data || [];
 }

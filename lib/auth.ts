@@ -15,7 +15,14 @@ export async function getUser() {
     const jwt = getAuthToken();
     const {
       data: { user },
+      error,
     } = await supabase.auth.getUser(jwt);
+
+    if (error) {
+      removeAuthToken();
+      return null;
+    }
+
     return user;
   } catch (error) {
     removeAuthToken();

@@ -12,12 +12,15 @@ import Link from 'next/link'
 import { CURRENCIES } from '@/types/savings'
 import { Badge } from './ui/badge'
 import { Progress } from './ui/progress'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 interface DashboardProps {
     dict: any
     challenges: SavingsChallenge[]
     isLoadingChallenges: boolean
 }
+
+const queryClient = new QueryClient()
 
 export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardProps) {
     const [showCreateDialog, setShowCreateDialog] = useState(false)
@@ -55,16 +58,19 @@ export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardPr
     ]
 
     return (
-        <div className="space-y-8">
-            <Header dict={dict} setShowCreateDialog={setShowCreateDialog} />
-            <Stats stats={stats} />
-            <Challenges dict={dict} challenges={challenges} isLoading={isLoadingChallenges} />
-            <CreateChallengeDialog
-                open={showCreateDialog}
-                onOpenChange={setShowCreateDialog}
-                dict={dict}
-            />
-        </div>
+        <QueryClientProvider client={queryClient}>
+            <div className="space-y-8">
+                <Header dict={dict} setShowCreateDialog={setShowCreateDialog} />
+                <Stats stats={stats} />
+                <Challenges dict={dict} challenges={challenges} isLoading={isLoadingChallenges} />
+                <CreateChallengeDialog
+                    open={showCreateDialog}
+                    onOpenChange={setShowCreateDialog}
+                    dict={dict}
+                />
+            </div>
+        </QueryClientProvider>
+
     )
 }
 
@@ -90,6 +96,7 @@ function Header({ dict, setShowCreateDialog }: { dict: any, setShowCreateDialog:
                 </Button>
             </div>
         </div>
+
     )
 }
 
@@ -182,7 +189,7 @@ function Challenges({ dict, challenges, isLoading }: { dict: any, challenges: Sa
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                     >
-                        <Link href={`/challenge/${challenge.id}`}>
+                        <Link href={`#`}>
                             <Card className="cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1">
                                 <CardContent className="p-6">
                                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
