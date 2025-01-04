@@ -6,10 +6,11 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Icons } from './icons'
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { LanguageSwitcher } from './language-switcher'
+import { useRouter } from 'next/navigation'
+import { loginWithGoogle, loginWithPassword } from '@/lib/auth'
 
 interface AuthFormProps {
     lang: string
@@ -17,26 +18,24 @@ interface AuthFormProps {
 }
 
 export function AuthForm({ lang, dict }: AuthFormProps) {
+    // needs improvement, add zod and form validation
     const [isLoading, setIsLoading] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const supabase = createClientComponentClient()
+    const router = useRouter()
 
     const handleEmailLogin = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsLoading(true)
         setError(null)
 
-        const { error } = await supabase.auth.signInWithPassword({
-            email,
-            password,
-        })
-
+        const error = await loginWithPassword({ email, password })
         if (error) {
             setError(error.message)
         }
         setIsLoading(false)
+        // router.push(`/`)
     }
 
     const handleEmailSignUp = async (e: React.FormEvent) => {
@@ -44,37 +43,31 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
         setIsLoading(true)
         setError(null)
 
-        const { error } = await supabase.auth.signUp({
+        const error = await loginWithPassword({
             email,
-            password,
-            options: {
-                emailRedirectTo: `${location.origin}/auth/callback`,
-            },
+            password
         })
-
         if (error) {
             setError(error.message)
         } else {
             setError(dict.auth.checkEmail)
         }
         setIsLoading(false)
+
+        router.push(`/`)
     }
 
     const handleGoogleLogin = async () => {
         setIsLoading(true)
         setError(null)
 
-        const { error } = await supabase.auth.signInWithOAuth({
-            provider: 'google',
-            options: {
-                redirectTo: `${location.origin}/auth/callback`,
-            },
-        })
-
+        const error = await loginWithGoogle()
         if (error) {
             setError(error.message)
         }
         setIsLoading(false)
+
+        router.push(`/`)
     }
 
     return (
