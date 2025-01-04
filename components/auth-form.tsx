@@ -10,7 +10,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useRouter } from 'next/navigation'
-import { useLoginWithGoogle, useLoginWithPassword } from '@/lib/auth'
+import { useLoginWithGoogle, useLoginWithPassword, useRegisterWithPassword } from '@/lib/auth'
 
 interface AuthFormProps {
     lang: string
@@ -42,7 +42,7 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
         e.preventDefault()
         setIsLoading(true)
         setError(null)
-        const error = await useLoginWithPassword({
+        const error = await useRegisterWithPassword({
             email,
             password
         })

@@ -60,8 +60,24 @@ export async function useLoginWithGoogle() {
     data: { user },
   } = await supabase.auth.getUser();
 
-  console.log(user);
-  // if (session) setAuthToken(session.access_token);
+  return error;
+}
+
+export async function useRegisterWithPassword({
+  email,
+  password,
+}: {
+  email: string;
+  password: string;
+}) {
+  const { error } = await supabase.auth.signUp({
+    email,
+    password,
+    options: {
+      emailRedirectTo: `${origin}/auth/callback`,
+    },
+  });
+
   return error;
 }
 
