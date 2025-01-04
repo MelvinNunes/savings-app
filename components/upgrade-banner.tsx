@@ -11,6 +11,7 @@ import {
 } from '@/components/ui/sheet'
 import { AuthForm } from './auth-form'
 import { Sparkles } from 'lucide-react'
+import AuthSheet from './auth-sheet'
 
 interface UpgradeBannerProps {
     lang: string
@@ -27,20 +28,7 @@ export function UpgradeBanner({ lang, dict }: UpgradeBannerProps) {
                         {dict.savings.upgradeBanner.text}
                     </p>
                 </div>
-                <Sheet>
-                    <SheetTrigger asChild>
-                        <Button className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700">
-                            {dict.savings.upgradeBanner.button}
-                        </Button>
-                    </SheetTrigger>
-                    <SheetContent className="w-full sm:max-w-md">
-                        <SheetHeader className="mb-4">
-                            <SheetTitle>{dict.auth.title}</SheetTitle>
-                            <SheetDescription>{dict.auth.description}</SheetDescription>
-                        </SheetHeader>
-                        <AuthForm lang={lang} dict={dict} />
-                    </SheetContent>
-                </Sheet>
+                <AuthSheet lang={lang} dict={dict} isHeader={false} />
             </div>
         </div>
     )

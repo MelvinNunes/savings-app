@@ -2,13 +2,31 @@
   "auth": {
     "title": "Welcome to Savings Challenge",
     "description": "Sign in to save and track your progress",
-    "signInWithEmail": "Sign In with Email",
-    "signUpWithEmail": "Sign Up with Email",
+    "signInWithEmail": "Sign In",
+    "signUpWithEmail": "Sign Up",
     "continueWithGoogle": "Continue with Google",
     "orContinueWith": "Or continue with",
     "email": "Email",
     "password": "Password",
     "checkEmail": "Check your email for the confirmation link."
+  },
+  "header": {
+    "navigation": {
+      "dashboard": "Dashboard",
+      "calculator": "Calculator"
+    },
+    "branding": {
+      "name": "Savings Challenge"
+    },
+    "accountMenu": {
+      "account": "Account",
+      "dashboard": "Dashboard",
+      "calculator": "Calculator",
+      "signOut": "Sign out"
+    },
+    "mainTitle": "Your Savings Challenges",
+    "subTitle": "Track and manage your savings goals. Create multiple challenges, set targets, and watch your savings grow over time.",
+    "newChallenge": "New Challenge"
   },
   "savings": {
     "title": "2025 Savings Challenge",
@@ -74,5 +92,29 @@
     "baseAmount": "Base Amount",
     "currency": "Currency",
     "create": "Create Challenge"
+  },
+  "stats": {
+    "totalSaved": {
+      "title": "Total Saved",
+      "description": "Across all challenges",
+      "trend": " from last month"
+    },
+    "activeChallenges": {
+      "title": "Active Challenges",
+      "description": " completed",
+      "trend": " archived"
+    }
+  },
+  "challenges": {
+    "status": {
+      "archived": "Archived",
+      "completed": "Completed",
+      "inProgress": "In Progress"
+    },
+    "labels": {
+      "progress": "Progress",
+      "base": " /month",
+      "started": "Started "
+    }
   }
 }

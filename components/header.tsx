@@ -15,48 +15,36 @@ import { ChevronDown, LayoutDashboard, LogOut, PiggyBank, User } from 'lucide-re
 import { cn } from '@/lib/utils'
 import { Icons } from './icons'
 import { useState } from 'react'
+import AuthSheet from './auth-sheet'
+import { LanguageSwitcher } from './language-switcher'
+import { ThemeSwitcher } from './theme-switcher'
 
 interface HeaderProps {
     view?: 'dashboard' | 'calculator'
     isAuthenticated: boolean
+    dict: any
+    lang: string
 }
 
-export function Header({ view, isAuthenticated }: HeaderProps) {
+export function Header({ view, isAuthenticated, dict, lang }: HeaderProps) {
     const router = useRouter()
     const supabase = createClientComponentClient()
-    const [isLoading, setIsLoading] = useState(false)
 
     const handleSignOut = async () => {
         await supabase.auth.signOut()
         router.refresh()
     }
 
-    const handleGoogleLogin = async () => {
-        try {
-            setIsLoading(true)
-            const { error } = await supabase.auth.signInWithOAuth({
-                provider: 'google',
-                options: {
-                    redirectTo: `${location.origin}/auth/callback`,
-                },
-            })
-            if (error) throw error
-        } catch (err) {
-            console.error('Login error:', err)
-        } finally {
-            setIsLoading(false)
-        }
-    }
 
     const navigation = [
         {
-            name: 'Dashboard',
+            name: dict.header.navigation.dashboard,
             href: '/',
             icon: LayoutDashboard,
             current: view === 'dashboard'
         },
         {
-            name: 'Calculator',
+            name: dict.header.navigation.calculator,
             href: '/calculator',
             icon: PiggyBank,
             current: view === 'calculator'
@@ -64,13 +52,13 @@ export function Header({ view, isAuthenticated }: HeaderProps) {
     ]
 
     return (
-        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 dark:bg-slate-800">
             <div className="container flex h-14 max-w-screen-2xl items-center justify-between">
                 <div className="flex items-center gap-6">
                     <Link href="/" className="flex items-center gap-2">
-                        <PiggyBank className="h-6 w-6 text-violet-600" />
-                        <span className="hidden font-bold sm:inline-block text-violet-600 ">
-                            Savings Challenge
+                        <PiggyBank className="h-6 w-6 text-violet-600 dark:text-violet-700" />
+                        <span className="hidden font-bold sm:inline-block text-violet-600 dark:text-violet-700">
+                            {dict.header.branding.name}
                         </span>
                     </Link>
                     {isAuthenticated && (
@@ -92,12 +80,16 @@ export function Header({ view, isAuthenticated }: HeaderProps) {
                     )}
                 </div>
                 <div className="flex items-center gap-2">
+                    <div className='flex justify-between gap-3'>
+                        <LanguageSwitcher currentLang={lang} />
+                        <ThemeSwitcher />
+                    </div>
                     {isAuthenticated ? (
                         <DropdownMenu>
                             <DropdownMenuTrigger asChild>
                                 <Button variant="ghost" className="gap-2">
                                     <User className="h-4 w-4" />
-                                    <span className="hidden sm:inline">Account</span>
+                                    <span className="hidden sm:inline">{dict.header.accountMenu.account}</span>
                                     <ChevronDown className="h-4 w-4" />
                                 </Button>
                             </DropdownMenuTrigger>
@@ -107,13 +99,13 @@ export function Header({ view, isAuthenticated }: HeaderProps) {
                                         <DropdownMenuItem asChild>
                                             <Link href="/" className="flex items-center gap-2">
                                                 <LayoutDashboard className="h-4 w-4" />
-                                                Dashboard
+                                                {dict.header.accountMenu.dashboard}
                                             </Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuItem asChild>
                                             <Link href="/calculator" className="flex items-center gap-2">
                                                 <PiggyBank className="h-4 w-4" />
-                                                Calculator
+                                                {dict.header.accountMenu.calculator}
                                             </Link>
                                         </DropdownMenuItem>
                                         <DropdownMenuSeparator />
@@ -124,23 +116,12 @@ export function Header({ view, isAuthenticated }: HeaderProps) {
                                     onClick={handleSignOut}
                                 >
                                     <LogOut className="h-4 w-4" />
-                                    Sign out
+                                    {dict.header.accountMenu.signOut}
                                 </DropdownMenuItem>
                             </DropdownMenuContent>
                         </DropdownMenu>
                     ) : (
-                        <Button
-                            onClick={handleGoogleLogin}
-                            disabled={isLoading}
-                            className="bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
-                        >
-                            {isLoading ? (
-                                <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                            ) : (
-                                <Icons.google className="mr-2 h-4 w-4" />
-                            )}
-                            Sign in with Google
-                        </Button>
+                        <AuthSheet dict={dict} lang={lang} isHeader={true} />
                     )}
                 </div>
             </div>

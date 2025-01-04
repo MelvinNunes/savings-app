@@ -36,42 +36,41 @@ export function Dashboard({ challenges, dict }: DashboardProps) {
 
     const stats = [
         {
-            title: 'Total Saved',
+            title: dict.stats.totalSaved.title,
             value: formatCurrency(totalSaved, CURRENCIES[0]),
-            description: 'Across all challenges',
+            description: dict.stats.totalSaved.description,
             icon: Wallet,
-            trend: '+12.3% from last month',
+            trend: `+12.3% ${dict.stats.totalSaved.trend}`,
             trendUp: true,
         },
         {
-            title: 'Active Challenges',
+            title: dict.stats.activeChallenges.title,
             value: activeCount.toString(),
-            description: `${completedCount} completed`,
+            description: `${completedCount} ${dict.stats.activeChallenges.description}`,
             icon: TrendingUp,
-            trend: `${archivedCount} archived`,
+            trend: `${archivedCount} ${dict.stats.activeChallenges.trend}`,
             trendUp: false,
         },
     ]
 
     return (
         <div className="space-y-8">
-            <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 to-indigo-600 px-8 py-12 text-white">
+            <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 dark:from-violet-800 to-indigo-600 dark:to-indigo-800 px-8 py-12 text-white">
                 <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" />
                 <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                     <div className="space-y-2">
-                        <h1 className="text-3xl font-bold">Your Savings Challenges</h1>
-                        <p className="text-white/80 max-w-[600px]">
-                            Track and manage your savings goals. Create multiple challenges, set targets,
-                            and watch your savings grow over time.
+                        <h1 className="text-3xl dark:text-slate-200 font-bold">{dict.header.mainTitle}</h1>
+                        <p className="text-white/80 dark:text-slate-300 max-w-[600px]">
+                            {dict.header.mainTitle}
                         </p>
                     </div>
                     <Button
                         onClick={() => setShowCreateDialog(true)}
                         size="lg"
-                        className="bg-white text-indigo-600 hover:bg-white/90"
+                        className="bg-white text-indigo-600 hover:bg-white/90 dark:bg-slate-950"
                     >
                         <PlusCircle className="mr-2 h-5 w-5" />
-                        New Challenge
+                        {dict.header.newChallenge}
                     </Button>
                 </div>
             </div>
@@ -95,12 +94,12 @@ export function Dashboard({ challenges, dict }: DashboardProps) {
                                             <h2 className="text-3xl font-bold tracking-tight">
                                                 {stat.value}
                                             </h2>
-                                            <Badge
+                                            {/* <Badge
                                                 variant={stat.trendUp ? 'default' : 'secondary'}
                                                 className="font-normal"
                                             >
                                                 {stat.trend}
-                                            </Badge>
+                                            </Badge> */}
                                         </div>
                                     </div>
                                     <div className="rounded-full bg-violet-100 p-3 text-violet-600 dark:bg-violet-900">
@@ -128,11 +127,11 @@ export function Dashboard({ challenges, dict }: DashboardProps) {
 
                     let status
                     if (challenge.isArchived) {
-                        status = { label: 'Archived', icon: Archive, color: 'text-yellow-600' }
+                        status = { label: dict.challenges.status.archived, icon: Archive, color: 'text-yellow-600' }
                     } else if (completedCount === totalMonths) {
-                        status = { label: 'Completed', icon: CheckCircle2, color: 'text-green-600' }
+                        status = { label: dict.challenges.status.completed, icon: CheckCircle2, color: 'text-green-600' }
                     } else {
-                        status = { label: 'In Progress', icon: Clock, color: 'text-blue-600' }
+                        status = { label: dict.challenges.status.inProgress, icon: Clock, color: 'text-blue-600' }
                     }
 
                     return (
@@ -169,9 +168,9 @@ export function Dashboard({ challenges, dict }: DashboardProps) {
                                         <div className="mt-4 space-y-2">
                                             <div className="flex items-center justify-between text-sm">
                                                 <div className="flex items-center gap-2">
-                                                    <span className="font-medium">Progress</span>
+                                                    <span className="font-medium">{dict.challenges.labels.progress}</span>
                                                     <span className="text-muted-foreground">
-                                                        {completedCount}/{totalMonths} months
+                                                        {completedCount}/{totalMonths} {dict.dashboard.months}
                                                     </span>
                                                 </div>
                                                 <span className="font-medium">
@@ -181,9 +180,9 @@ export function Dashboard({ challenges, dict }: DashboardProps) {
                                             <Progress value={progress} className="h-2" />
                                             <div className="flex justify-between text-xs text-muted-foreground">
                                                 <span>
-                                                    Base: {formatCurrency(challenge.baseAmount, currency)}/month
+                                                    {formatCurrency(challenge.baseAmount, currency)} {dict.challenges.labels.base}
                                                 </span>
-                                                <span>Started {new Date(challenge.startDate).toLocaleDateString()}</span>
+                                                <span>{dict.challenges.labels.started} {new Date(challenge.startDate).toLocaleDateString()}</span>
                                             </div>
                                         </div>
                                     </CardContent>

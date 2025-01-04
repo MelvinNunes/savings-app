@@ -32,8 +32,8 @@ export default function CalculatorPage({ params }: PageProps) {
     }
 
     return (
-        <div className="min-h-screen bg-slate-100 w-full">
-            <Header view="calculator" isAuthenticated />
+        <div className="min-h-screen bg-slate-100 dark:bg-slate-700 w-full">
+            <Header view="calculator" dict={dictionary} lang={lang} isAuthenticated />
             <div className="container py-10 space-y-8">
                 <SavingsCalculator isAuthenticated={true} dict={dictionary} lang={lang} />
             </div>

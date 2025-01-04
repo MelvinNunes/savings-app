@@ -10,6 +10,24 @@
     "password": "Senha",
     "checkEmail": "Verifique seu email para o link de confirmação."
   },
+  "header": {
+    "navigation": {
+      "dashboard": "Dashboard",
+      "calculator": "Calculadora"
+    },
+    "branding": {
+      "name": "Desafio de Poupança"
+    },
+    "accountMenu": {
+      "account": "Conta",
+      "dashboard": "Dashboard",
+      "calculator": "Calculadora",
+      "signOut": "Sair"
+    },
+    "mainTitle": "Seus Desafios de Poupança",
+    "subTitle": "Acompanhe e gerencie suas metas de poupança. Crie vários desafios, defina metas e veja suas economias crescerem ao longo do tempo.",
+    "newChallenge": "Novo Desafio"
+  },
   "savings": {
     "title": "Desafio de Poupança 2025",
     "subtitle": "Acompanhe sua jornada de poupança, mês a mês",
@@ -74,5 +92,29 @@
     "baseAmount": "Valor Base",
     "currency": "Moeda",
     "create": "Criar Desafio"
+  },
+  "stats": {
+    "totalSaved": {
+      "title": "Total Poupado",
+      "description": "Em todos os desafios",
+      "trend": "em relação ao mês passado"
+    },
+    "activeChallenges": {
+      "title": "Desafios Ativos",
+      "description": " concluídos",
+      "trend": " arquivados"
+    }
+  },
+  "challenges": {
+    "status": {
+      "archived": "Arquivado",
+      "completed": "Concluído",
+      "inProgress": "Em Progresso"
+    },
+    "labels": {
+      "progress": "Progresso",
+      "base": "/mês",
+      "started": "Iniciado em "
+    }
   }
 }

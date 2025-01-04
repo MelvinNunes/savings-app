@@ -19,7 +19,7 @@ export function LanguageSwitcher({ currentLang }: { currentLang: string }) {
 
     return (
         <Select value={currentLang} onValueChange={handleLanguageChange}>
-            <SelectTrigger className="w-[140px]">
+            <SelectTrigger className="w-[140px] dark:border-slate-600">
                 <SelectValue placeholder="Select language" />
             </SelectTrigger>
             <SelectContent>
