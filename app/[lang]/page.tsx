@@ -8,6 +8,8 @@ import LoadingSpinner from '@/components/loading-spinner';
 import { Dashboard } from '@/components/dashboard';
 import { Header } from '@/components/header';
 import { useGetAllUserChallenges } from '@/data/challenges';
+import { useAtom } from 'jotai';
+import { addedChallengeCountAtom } from '@/atom/challenge-atoms';
 
 interface PageProps {
     params: Promise<{
@@ -22,7 +24,7 @@ export default function Page({ params }: PageProps) {
     const { user, isLoading: authLoading } = useAuthentication();
     const [userChallenges, setUserChallenges] = useState<any[]>([]);
     const [isLoadingUserChallenges, setIsLoadingUserChallenges] = useState(true);
-
+    const [addedChallengeCount] = useAtom(addedChallengeCountAtom)
 
     useEffect(() => {
         if (user) {
@@ -33,7 +35,7 @@ export default function Page({ params }: PageProps) {
                 setIsLoadingUserChallenges(false);
             });
         }
-    }, [user]);
+    }, [user, addedChallengeCount]);
 
     if (authLoading || !dictionary || dictionaryError) {
         return (

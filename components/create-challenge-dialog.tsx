@@ -11,6 +11,8 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { Icons } from './icons'
 import { getUser } from '@/lib/auth'
 import { useCreateChallenge } from '@/data/challenges'
+import { useAtom } from 'jotai'
+import { addedChallengeCountAtom } from '@/atom/challenge-atoms'
 
 interface CreateChallengeDialogProps {
     open: boolean
@@ -28,6 +30,7 @@ export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChalle
     const [baseAmount, setBaseAmount] = useState('200')
     const [currencyCode, setCurrencyCode] = useState('MZN')
     const [type, setType] = useState('incremental')
+    const [, setAddedChallengeCount] = useAtom(addedChallengeCountAtom)
 
     const { createChallenge } = useCreateChallenge()
 
@@ -74,7 +77,11 @@ export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChalle
                 user_id: user.id
             }
 
-            createChallenge(challenge)
+            createChallenge(challenge, {
+                onSuccess: () => {
+                    setAddedChallengeCount((addedChallengeCount) => addedChallengeCount + 1)
+                }
+            })
 
 
             onOpenChange(false)

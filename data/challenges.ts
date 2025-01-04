@@ -10,9 +10,6 @@ export function useCreateChallenge() {
         .select("*");
       return res;
     },
-    onSuccess: (result: any) => {
-      // Get current data from cache
-    },
   });
 
   return {
