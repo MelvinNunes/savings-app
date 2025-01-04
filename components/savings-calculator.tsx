@@ -19,15 +19,17 @@ import { LanguageSwitcher } from './language-switcher'
 import { UpgradeBanner } from './upgrade-banner'
 import { ThemeSwitcher } from './theme-switcher'
 import { getUser } from '@/lib/auth'
+import { removeAuthToken } from '@/lib/token.utils'
+import LoadingSpinner from './loading-spinner'
 
 interface SavingsCalculatorProps {
     lang: string
     dict: any
+    isAuthenticated: boolean
 }
 
-export default function SavingsCalculator({ lang, dict }: SavingsCalculatorProps) {
-    const [isAuthenticated, setIsAuthenticated] = useState(false)
-    const [isLoading, setIsLoading] = useState(false)
+export default function SavingsCalculator({ lang, dict, isAuthenticated }: SavingsCalculatorProps) {
+    const [isLoading, setIsLoading] = useState(isAuthenticated)
     const [, setIsSaving] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [baseAmount, setBaseAmount] = useState<number>(200)
@@ -143,27 +145,9 @@ export default function SavingsCalculator({ lang, dict }: SavingsCalculatorProps
 
     if (isLoading) {
         return (
-            <div className="flex items-center justify-center min-h-[400px]">
-                <Icons.spinner className="h-8 w-8 animate-spin" />
-            </div>
+            <LoadingSpinner />
         )
     }
-
-
-    const getAuthenticatedUser = async () => {
-        getUser().then(() => {
-            setIsLoading(false)
-            setIsAuthenticated(true)
-        }).catch(() => {
-            setIsLoading(false)
-            setIsAuthenticated(false)
-        })
-    }
-
-
-    useEffect(() => {
-        getAuthenticatedUser()
-    }, [])
 
 
     return (
