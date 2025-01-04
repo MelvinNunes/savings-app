@@ -52,5 +52,27 @@
     "october": "Outubro",
     "november": "Novembro",
     "december": "Dezembro"
+  },
+  "dashboard": {
+    "title": "Seus Desafios de Poupança",
+    "subtitle": "Acompanhe e gerencie suas metas de poupança",
+    "newChallenge": "Novo Desafio",
+    "stats": {
+      "totalSaved": "Total Poupado",
+      "acrossAllChallenges": "Em todos os desafios",
+      "activeChallenges": "Desafios Ativos",
+      "completed": "completados"
+    },
+    "progress": "Progresso",
+    "months": "meses"
+  },
+  "createChallenge": {
+    "title": "Criar Novo Desafio",
+    "description": "Configure um novo desafio de poupança para acompanhar seu progresso",
+    "name": "Nome do Desafio",
+    "type": "Tipo de Desafio",
+    "baseAmount": "Valor Base",
+    "currency": "Moeda",
+    "create": "Criar Desafio"
   }
 }

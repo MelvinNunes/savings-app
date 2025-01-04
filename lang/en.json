@@ -52,5 +52,27 @@
     "october": "October",
     "november": "November",
     "december": "December"
+  },
+  "dashboard": {
+    "title": "Your Savings Challenges",
+    "subtitle": "Track and manage your savings goals",
+    "newChallenge": "New Challenge",
+    "stats": {
+      "totalSaved": "Total Saved",
+      "acrossAllChallenges": "Across all challenges",
+      "activeChallenges": "Active Challenges",
+      "completed": "completed"
+    },
+    "progress": "Progress",
+    "months": "months"
+  },
+  "createChallenge": {
+    "title": "Create New Challenge",
+    "description": "Set up a new savings challenge to track your progress",
+    "name": "Challenge Name",
+    "type": "Challenge Type",
+    "baseAmount": "Base Amount",
+    "currency": "Currency",
+    "create": "Create Challenge"
   }
 }
