@@ -116,5 +116,19 @@
       "base": " /month",
       "started": "Started "
     }
+  },
+  "challengeTypes": {
+    "incremental": {
+      "name": "Incremental Savings",
+      "description": "Save more each month by incrementing your base amount"
+    },
+    "fixed": {
+      "name": "Fixed Monthly Savings",
+      "description": "Save the same amount each month"
+    },
+    "custom": {
+      "name": "Custom Savings Plan",
+      "description": "Set your own monthly savings targets"
+    }
   }
 }

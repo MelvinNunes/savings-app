@@ -116,5 +116,19 @@
       "base": "/mês",
       "started": "Iniciado em "
     }
+  },
+  "challengeTypes": {
+    "incremental": {
+      "name": "Poupança Incremental",
+      "description": "Poupe mais a cada mês aumentando o valor base"
+    },
+    "fixed": {
+      "name": "Poupança Mensal Fixa",
+      "description": "Poupe o mesmo valor todos os meses"
+    },
+    "custom": {
+      "name": "Plano de Poupança Personalizado",
+      "description": "Defina suas próprias metas de poupança mensal"
+    }
   }
 }

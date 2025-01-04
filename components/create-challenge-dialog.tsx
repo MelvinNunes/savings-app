@@ -8,7 +8,6 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { CurrencySelector } from './currency-selector'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
-import { CHALLENGE_TYPES } from '@/types/savings'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { Icons } from './icons'
@@ -21,6 +20,7 @@ interface CreateChallengeDialogProps {
 }
 
 export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChallengeDialogProps) {
+    // to refactor, use zod
     const [isLoading, setIsLoading] = useState(false)
     const [name, setName] = useState('')
     const [description, setDescription] = useState('')
@@ -30,6 +30,24 @@ export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChalle
 
     const router = useRouter()
     const supabase = createClientComponentClient()
+
+    const CHALLENGE_TYPES = [
+        {
+            id: "incremental",
+            name: dict.challengeTypes.incremental.name,
+            description: dict.challengeTypes.incremental.description,
+        },
+        {
+            id: "fixed",
+            name: dict.challengeTypes.fixed.name,
+            description: dict.challengeTypes.fixed.description,
+        },
+        {
+            id: "custom",
+            name: dict.challengeTypes.custom.name,
+            description: dict.challengeTypes.custom.description,
+        },
+    ];
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()

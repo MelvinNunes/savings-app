@@ -32,21 +32,3 @@ export const CURRENCIES: Currency[] = [
   { code: "ZAR", symbol: "R", name: "South African Rand" },
   { code: "AUD", symbol: "A$", name: "Australian Dollar" },
 ];
-
-export const CHALLENGE_TYPES = [
-  {
-    id: "incremental",
-    name: "Incremental Savings",
-    description: "Save more each month by incrementing your base amount",
-  },
-  {
-    id: "fixed",
-    name: "Fixed Monthly Savings",
-    description: "Save the same amount each month",
-  },
-  {
-    id: "custom",
-    name: "Custom Savings Plan",
-    description: "Set your own monthly savings targets",
-  },
-];
