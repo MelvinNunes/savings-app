@@ -1,0 +1,138 @@
+{
+  "auth": {
+    "title": "Welcome to Savings Challenge",
+    "description": "Sign in to save and track your progress",
+    "signInWithEmail": "Sign In",
+    "signUpWithEmail": "Sign Up",
+    "continueWithGoogle": "Continue with Google",
+    "orContinueWith": "Or continue with",
+    "email": "Email",
+    "password": "Password",
+    "checkEmail": "Check your email for the confirmation link."
+  },
+  "header": {
+    "navigation": {
+      "dashboard": "Dashboard",
+      "calculator": "Calculator"
+    },
+    "branding": {
+      "name": "Savings Challenge"
+    },
+    "accountMenu": {
+      "account": "Account",
+      "dashboard": "Dashboard",
+      "calculator": "Calculator",
+      "signOut": "Sign out"
+    },
+    "mainTitle": "Your Savings Challenges",
+    "subTitle": "Track and manage your savings goals. Create multiple challenges, set targets, and watch your savings grow over time.",
+    "newChallenge": "New Challenge"
+  },
+  "savings": {
+    "title": "2025 Savings Challenge",
+    "subtitle": "Track your savings journey, one month at a time",
+    "signOut": "Sign Out",
+    "signInToSave": "Sign In to Save Progress",
+    "upgradeBanner": {
+      "text": "Want to save your progress and access from any device? Create a free account!",
+      "button": "Upgrade for Free"
+    },
+    "insights": {
+      "totalSaved": "Total Saved",
+      "monthlyProgress": "Monthly Progress",
+      "nextTarget": "Next Target",
+      "averageSavings": "Average Savings",
+      "onTrack": "You're on track! 🎉",
+      "keepPushing": "Keep pushing! 💪",
+      "increasePerMonth": "increase per month",
+      "perCompletedMonth": "Per completed month",
+      "ofYearlyGoal": "of yearly goal"
+    },
+    "plan": {
+      "title": "Monthly Savings Plan",
+      "description": "Track your progress and mark completed months",
+      "baseAmount": "Base Amount",
+      "currency": "Currency",
+      "progress": "Progress",
+      "completed": "Completed!"
+    },
+    "notAuth": {
+      "title": "You're using the basic version. Your progress won't be saved when you leave",
+      "save": "to save your progress across devices."
+    }
+  },
+  "months": {
+    "january": "January",
+    "february": "February",
+    "march": "March",
+    "april": "April",
+    "may": "May",
+    "june": "June",
+    "july": "July",
+    "august": "August",
+    "september": "September",
+    "october": "October",
+    "november": "November",
+    "december": "December"
+  },
+  "dashboard": {
+    "title": "Your Savings Challenges",
+    "subtitle": "Track and manage your savings goals",
+    "newChallenge": "New Challenge",
+    "stats": {
+      "totalSaved": "Total Saved",
+      "acrossAllChallenges": "Across all challenges",
+      "activeChallenges": "Active Challenges",
+      "completed": "completed"
+    },
+    "progress": "Progress",
+    "months": "months"
+  },
+  "createChallenge": {
+    "title": "Create New Challenge",
+    "description": "Set up a new savings challenge to track your progress",
+    "name": "Challenge Name",
+    "type": "Challenge Type",
+    "baseAmount": "Base Amount",
+    "currency": "Currency",
+    "create": "Create Challenge"
+  },
+  "stats": {
+    "totalSaved": {
+      "title": "Total Saved",
+      "description": "Across all challenges",
+      "trend": " from last month"
+    },
+    "activeChallenges": {
+      "title": "Active Challenges",
+      "description": " completed",
+      "trend": " archived"
+    }
+  },
+  "challenges": {
+    "status": {
+      "archived": "Archived",
+      "completed": "Completed",
+      "inProgress": "In Progress"
+    },
+    "labels": {
+      "progress": "Progress",
+      "base": " /month",
+      "started": "Started "
+    }
+  },
+  "challengeTypes": {
+    "incremental": {
+      "name": "Incremental Savings",
+      "description": "Save more each month by incrementing your base amount"
+    },
+    "fixed": {
+      "name": "Fixed Monthly Savings",
+      "description": "Save the same amount each month"
+    },
+    "custom": {
+      "name": "Custom Savings Plan",
+      "description": "Set your own monthly savings targets"
+    }
+  }
+}

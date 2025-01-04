@@ -1,7 +1,7 @@
-export interface SavingsGoal {
-  baseAmount: number;
-  monthlyIncrement: number;
-  currency: string;
+export interface Currency {
+  code: string;
+  symbol: string;
+  name: string;
 }
 
 export interface MonthlyTarget {
@@ -10,14 +10,22 @@ export interface MonthlyTarget {
   isCompleted: boolean;
 }
 
-export interface Currency {
-  code: string;
-  symbol: string;
+export interface SavingsChallenge {
+  id: string;
   name: string;
+  description?: string;
+  type: "incremental" | "fixed" | "custom";
+  baseAmount: number;
+  currencyCode: string;
+  startDate: string;
+  progress: MonthlyTarget[];
+  isArchived?: boolean;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export const CURRENCIES: Currency[] = [
-  { code: "MZN", symbol: "MZN", name: "Mozambican Metical" },
+  { code: "MZN", symbol: "MZN", name: "Metical" },
   { code: "USD", symbol: "$", name: "US Dollar" },
   { code: "EUR", symbol: "€", name: "Euro" },
   { code: "GBP", symbol: "£", name: "British Pound" },

@@ -1,0 +1,138 @@
+{
+  "auth": {
+    "title": "Bem-vindo ao Desafio de Poupança",
+    "description": "Entre para salvar e acompanhar seu progresso",
+    "signInWithEmail": "Entrar",
+    "signUpWithEmail": "Registrar",
+    "continueWithGoogle": "Continuar com Google",
+    "orContinueWith": "Ou continue com",
+    "email": "Email",
+    "password": "Senha",
+    "checkEmail": "Verifique seu email para o link de confirmação."
+  },
+  "header": {
+    "navigation": {
+      "dashboard": "Dashboard",
+      "calculator": "Calculadora"
+    },
+    "branding": {
+      "name": "Desafio de Poupança"
+    },
+    "accountMenu": {
+      "account": "Conta",
+      "dashboard": "Dashboard",
+      "calculator": "Calculadora",
+      "signOut": "Sair"
+    },
+    "mainTitle": "Seus Desafios de Poupança",
+    "subTitle": "Acompanhe e gerencie suas metas de poupança. Crie vários desafios, defina metas e veja suas economias crescerem ao longo do tempo.",
+    "newChallenge": "Novo Desafio"
+  },
+  "savings": {
+    "title": "Desafio de Poupança 2025",
+    "subtitle": "Acompanhe sua jornada de poupança, mês a mês",
+    "signOut": "Sair",
+    "signInToSave": "Entre para Salvar Progresso",
+    "upgradeBanner": {
+      "text": "Quer salvar seu progresso e acessar de qualquer dispositivo? Crie uma conta gratuita!",
+      "button": "Atualize Gratuitamente"
+    },
+    "insights": {
+      "totalSaved": "Total Poupado",
+      "monthlyProgress": "Progresso Mensal",
+      "nextTarget": "Próxima Meta",
+      "averageSavings": "Média de Poupança",
+      "onTrack": "Você está no caminho! 🎉",
+      "keepPushing": "Continue se esforçando! 💪",
+      "increasePerMonth": "aumento por mês",
+      "perCompletedMonth": "Por mês completado",
+      "ofYearlyGoal": "da meta anual"
+    },
+    "plan": {
+      "title": "Plano de Poupança Mensal",
+      "description": "Acompanhe seu progresso e marque os meses completados",
+      "baseAmount": "Valor Base",
+      "currency": "Moeda",
+      "progress": "Progresso",
+      "completed": "Completado!"
+    },
+    "notAuth": {
+      "title": "Você está a utilizar a versão básica. Seu progresso não será salvo quando você sair.",
+      "save": "para salvar seu progresso em vários dispositivos."
+    }
+  },
+  "months": {
+    "january": "Janeiro",
+    "february": "Fevereiro",
+    "march": "Março",
+    "april": "Abril",
+    "may": "Maio",
+    "june": "Junho",
+    "july": "Julho",
+    "august": "Agosto",
+    "september": "Setembro",
+    "october": "Outubro",
+    "november": "Novembro",
+    "december": "Dezembro"
+  },
+  "dashboard": {
+    "title": "Seus Desafios de Poupança",
+    "subtitle": "Acompanhe e gerencie suas metas de poupança",
+    "newChallenge": "Novo Desafio",
+    "stats": {
+      "totalSaved": "Total Poupado",
+      "acrossAllChallenges": "Em todos os desafios",
+      "activeChallenges": "Desafios Ativos",
+      "completed": "completados"
+    },
+    "progress": "Progresso",
+    "months": "meses"
+  },
+  "createChallenge": {
+    "title": "Criar Novo Desafio",
+    "description": "Configure um novo desafio de poupança para acompanhar seu progresso",
+    "name": "Nome do Desafio",
+    "type": "Tipo de Desafio",
+    "baseAmount": "Valor Base",
+    "currency": "Moeda",
+    "create": "Criar Desafio"
+  },
+  "stats": {
+    "totalSaved": {
+      "title": "Total Poupado",
+      "description": "Em todos os desafios",
+      "trend": "em relação ao mês passado"
+    },
+    "activeChallenges": {
+      "title": "Desafios Ativos",
+      "description": " concluídos",
+      "trend": " arquivados"
+    }
+  },
+  "challenges": {
+    "status": {
+      "archived": "Arquivado",
+      "completed": "Concluído",
+      "inProgress": "Em Progresso"
+    },
+    "labels": {
+      "progress": "Progresso",
+      "base": "/mês",
+      "started": "Iniciado em "
+    }
+  },
+  "challengeTypes": {
+    "incremental": {
+      "name": "Poupança Incremental",
+      "description": "Poupe mais a cada mês aumentando o valor base"
+    },
+    "fixed": {
+      "name": "Poupança Mensal Fixa",
+      "description": "Poupe o mesmo valor todos os meses"
+    },
+    "custom": {
+      "name": "Plano de Poupança Personalizado",
+      "description": "Defina suas próprias metas de poupança mensal"
+    }
+  }
+}
