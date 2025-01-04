@@ -1,11 +1,14 @@
 import SavingsCalculator from '@/components/savings-calculator'
 import { getDictionary } from '@/lib/dictionary'
 
-export default async function Page({
-    params: { lang }
-}: {
-    params: { lang: string }
-}) {
+interface PageProps {
+    params: {
+        lang: string;
+    };
+}
+
+export default async function Page({ params }: PageProps) {
+    const { lang } = await params;
     const dict = await getDictionary(lang)
 
     return (
