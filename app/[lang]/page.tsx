@@ -1,9 +1,8 @@
 'use client';
 
-import { use, useEffect, useState } from 'react';
+import { use } from 'react';
 import SavingsCalculator from '@/components/savings-calculator';
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs';
-import { getUser, useAuthentication } from '@/lib/auth';
+import { useAuthentication } from '@/lib/auth';
 import { useLocalization } from '@/lib/dictionary';
 import LoadingSpinner from '@/components/loading-spinner';
 
