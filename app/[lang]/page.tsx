@@ -23,12 +23,8 @@ export default function Page({ params }: PageProps) {
     const { lang } = use(params);
     const { dictionary, error: dictionaryError } = useLocalization(lang);
     const { user, isLoading: authLoading } = useAuthentication();
-    const [challenges, setChallenges] = useState<SavingsChallenge[]>([]);
-    const [isLoadingChallenges, setIsLoadingChallenges] = useState(true);
 
-    useEffect(() => {
-        useGetAllUserChallenges().then(setChallenges).finally(() => setIsLoadingChallenges(false));
-    }, [user])
+    const { data: userChallenges, isFetching: isLoadingUserChallenges } = useGetAllUserChallenges(user?.id || '', true);
 
     if (authLoading || !dictionary || dictionaryError) {
         return (
@@ -43,8 +39,8 @@ export default function Page({ params }: PageProps) {
                 {
                     user ?
                         <Dashboard
-                            challenges={challenges}
-                            isLoadingChallenges={isLoadingChallenges}
+                            challenges={userChallenges || []}
+                            isLoadingChallenges={isLoadingUserChallenges}
                             dict={dictionary}
                         /> :
                         <SavingsCalculator

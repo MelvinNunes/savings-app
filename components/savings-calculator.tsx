@@ -68,7 +68,7 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
                 setMonthlySavings(data[0].progress as MonthlyTarget[])
             }
         } catch (err) {
-            console.error('Error loading progress:', err)
+            setIsLoading(false)
         } finally {
             setIsLoading(false)
         }

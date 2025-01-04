@@ -12,12 +12,15 @@ import Link from 'next/link'
 import { CURRENCIES } from '@/types/savings'
 import { Badge } from './ui/badge'
 import { Progress } from './ui/progress'
+import { QueryClient, QueryClientProvider } from 'react-query'
 
 interface DashboardProps {
     dict: any
     challenges: SavingsChallenge[]
     isLoadingChallenges: boolean
 }
+
+const queryClient = new QueryClient()
 
 export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardProps) {
     const [showCreateDialog, setShowCreateDialog] = useState(false)
@@ -55,22 +58,27 @@ export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardPr
     ]
 
     return (
-        <div className="space-y-8">
-            <Header dict={dict} setShowCreateDialog={setShowCreateDialog} />
-            <Stats stats={stats} />
-            <Challenges dict={dict} challenges={challenges} isLoading={isLoadingChallenges} />
-            <CreateChallengeDialog
-                open={showCreateDialog}
-                onOpenChange={setShowCreateDialog}
-                dict={dict}
-            />
-        </div>
+        <QueryClientProvider client={queryClient}>
+            <div className="space-y-8">
+                <Header dict={dict} setShowCreateDialog={setShowCreateDialog} />
+                <Stats stats={stats} />
+                <Challenges dict={dict} challenges={challenges} isLoading={isLoadingChallenges} />
+                <CreateChallengeDialog
+                    open={showCreateDialog}
+                    onOpenChange={setShowCreateDialog}
+                    dict={dict}
+                />
+            </div>
+        </QueryClientProvider>
+
     )
 }
 
 
 function Header({ dict, setShowCreateDialog }: { dict: any, setShowCreateDialog: Dispatch<SetStateAction<boolean>> }) {
     return (
+
+
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 dark:from-violet-800 to-indigo-600 dark:to-indigo-800 px-8 py-12 text-white">
             <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" />
             <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -90,6 +98,7 @@ function Header({ dict, setShowCreateDialog }: { dict: any, setShowCreateDialog:
                 </Button>
             </div>
         </div>
+
     )
 }
 
