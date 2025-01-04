@@ -18,6 +18,7 @@ import { formatCurrency } from '../utils/format-currency'
 import { LanguageSwitcher } from './language-switcher'
 import { UpgradeBanner } from './upgrade-banner'
 import { ThemeSwitcher } from './theme-switcher'
+import { getUser } from '@/lib/auth'
 
 interface SavingsCalculatorProps {
     isAuthenticated: boolean
@@ -26,6 +27,8 @@ interface SavingsCalculatorProps {
 }
 
 export default function SavingsCalculator({ isAuthenticated, lang, dict }: SavingsCalculatorProps) {
+
+
     const [isLoading, setIsLoading] = useState(isAuthenticated)
     const [, setIsSaving] = useState(false)
     const [error, setError] = useState<string | null>(null)
@@ -101,7 +104,7 @@ export default function SavingsCalculator({ isAuthenticated, lang, dict }: Savin
 
             // Only attempt to save to Supabase if authenticated
             if (isAuthenticated) {
-                const { data: { user } } = await supabase.auth.getUser()
+                const user = await getUser()
                 if (!user) throw new Error('User not found')
 
                 const { error } = await supabase
