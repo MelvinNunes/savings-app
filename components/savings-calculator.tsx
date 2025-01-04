@@ -21,15 +21,13 @@ import { ThemeSwitcher } from './theme-switcher'
 import { getUser } from '@/lib/auth'
 
 interface SavingsCalculatorProps {
-    isAuthenticated: boolean
     lang: string
     dict: any
 }
 
-export default function SavingsCalculator({ isAuthenticated, lang, dict }: SavingsCalculatorProps) {
-
-
-    const [isLoading, setIsLoading] = useState(isAuthenticated)
+export default function SavingsCalculator({ lang, dict }: SavingsCalculatorProps) {
+    const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const [, setIsSaving] = useState(false)
     const [error, setError] = useState<string | null>(null)
     const [baseAmount, setBaseAmount] = useState<number>(200)
@@ -50,7 +48,7 @@ export default function SavingsCalculator({ isAuthenticated, lang, dict }: Savin
 
     const loadSavingsProgress = async () => {
         try {
-            const { data: { user } } = await supabase.auth.getUser()
+            const user = await getUser()
             if (!user) throw new Error('User not found')
 
             const { data, error } = await supabase
@@ -153,12 +151,20 @@ export default function SavingsCalculator({ isAuthenticated, lang, dict }: Savin
 
 
     const getAuthenticatedUser = async () => {
-        const user = await getUser()
-        return user
+        getUser().then(() => {
+            setIsLoading(false)
+            setIsAuthenticated(true)
+        }).catch(() => {
+            setIsLoading(false)
+            setIsAuthenticated(false)
+        })
     }
 
 
-    getAuthenticatedUser().then(user => console.log("user: ", user))
+    useEffect(() => {
+        getAuthenticatedUser()
+    }, [])
+
 
     return (
         <div className="space-y-6 pb-24">

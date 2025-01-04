@@ -2,7 +2,7 @@ import {
   createClientComponentClient,
   createServerComponentClient,
 } from "@supabase/auth-helpers-nextjs";
-import { setAuthToken } from "./token.utils";
+import { getAuthToken, setAuthToken } from "./token.utils";
 
 const supabase = createClientComponentClient({
   isSingleton: true,
@@ -10,9 +10,12 @@ const supabase = createClientComponentClient({
 
 export async function getUser() {
   try {
+    const jwt = getAuthToken();
     const {
       data: { user },
-    } = await supabase.auth.getUser();
+    } = await supabase.auth.getUser(jwt);
+
+    console.log(user);
     return user;
   } catch (error) {
     return null;

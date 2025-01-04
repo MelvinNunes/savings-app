@@ -55,17 +55,6 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
         router.push(`/`)
     }
 
-    const handleGoogleLogin = async () => {
-        setIsLoading(true)
-        setError(null)
-
-        const error = await loginWithGoogle()
-        if (error) {
-            setError(error.message)
-        }
-        setIsLoading(false)
-        router.push(`/`)
-    }
 
     return (
         <Card className="w-full max-w-md mx-auto">
@@ -153,21 +142,6 @@ export function AuthForm({ lang, dict }: AuthFormProps) {
                         </span>
                     </div>
                 </div>
-
-                <Button
-                    variant="outline"
-                    type="button"
-                    className="w-full"
-                    onClick={handleGoogleLogin}
-                    disabled={isLoading}
-                >
-                    {isLoading ? (
-                        <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
-                    ) : (
-                        <Icons.google className="mr-2 h-4 w-4" />
-                    )}
-                    {dict.auth.continueWithGoogle}
-                </Button>
             </CardContent>
         </Card>
     )
