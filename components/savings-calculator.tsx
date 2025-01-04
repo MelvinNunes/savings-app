@@ -55,14 +55,14 @@ export default function SavingsCalculator({ lang, dict }: SavingsCalculatorProps
                 .from('savings_progress')
                 .select('*')
                 .eq('user_id', user.id)
-                .single()
+                .limit(1)
 
             if (error) throw error
 
-            if (data) {
-                setBaseAmount(data.base_amount)
-                setCurrencyCode(data.currency_code || 'MZN')
-                setMonthlySavings(data.progress as MonthlyTarget[])
+            if (data && data.length > 0) {
+                setBaseAmount(data[0].base_amount)
+                setCurrencyCode(data[0].currency_code || 'MZN')
+                setMonthlySavings(data[0].progress as MonthlyTarget[])
             }
         } catch (err) {
             console.error('Error loading progress:', err)
