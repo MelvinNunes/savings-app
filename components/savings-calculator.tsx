@@ -156,7 +156,6 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
             {showConfetti && <Confetti />}
 
             <SavingsHeader dict={dict} lang={lang} />
-
             {!isAuthenticated && <NotAuthAlert dict={dict} />}
 
             <InsightsCard
@@ -166,7 +165,6 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
                 currency={currency}
                 dict={dict}
             />
-
             {error && (
                 <Alert variant="destructive">
                     <AlertDescription>{error}</AlertDescription>
@@ -269,10 +267,6 @@ function SavingsHeader({ dict, lang }: { dict: any, lang: string }) {
                 <div>
                     <h1 className="text-3xl font-bold mb-2">{dict.savings.title}</h1>
                     <p className="text-white/80">{dict.savings.subtitle}</p>
-                </div>
-                <div className='flex justify-between gap-3'>
-                    <LanguageSwitcher currentLang={lang} />
-                    <ThemeSwitcher />
                 </div>
             </div>
         </div>
