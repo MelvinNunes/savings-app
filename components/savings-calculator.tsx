@@ -133,9 +133,6 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
         }
     }
 
-    const handleSignOut = async () => {
-        await supabase.auth.signOut()
-    }
 
     const totalSaved = monthlySavings
         .filter(saving => saving.isCompleted)

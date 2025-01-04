@@ -9,7 +9,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { CurrencySelector } from './currency-selector'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
-import { useRouter } from 'next/navigation'
+import { redirect, useRouter } from 'next/navigation'
 import { Icons } from './icons'
 import { getUser } from '@/lib/auth'
 
@@ -79,8 +79,8 @@ export function CreateChallengeDialog({ open, onOpenChange, dict }: CreateChalle
 
             if (error) throw error
 
-            router.refresh()
             onOpenChange(false)
+            redirect('/')
         } catch (error) {
             console.error('Error creating challenge:', error)
         } finally {
