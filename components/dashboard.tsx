@@ -5,7 +5,6 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Archive, ArrowUpRight, CheckCircle2, Clock, LucideProps, PlusCircle, TrendingUp, Wallet } from 'lucide-react'
 import { SavingsChallenge } from '@/types/savings'
-import { CreateChallengeDialog } from './create-challenge-dialog'
 import { motion } from 'framer-motion'
 import { formatCurrency } from '@/utils/format-currency'
 import Link from 'next/link'
@@ -63,11 +62,6 @@ export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardPr
                 <Header dict={dict} setShowCreateDialog={setShowCreateDialog} />
                 <Stats stats={stats} />
                 <Challenges dict={dict} challenges={challenges} isLoading={isLoadingChallenges} />
-                <CreateChallengeDialog
-                    open={showCreateDialog}
-                    onOpenChange={setShowCreateDialog}
-                    dict={dict}
-                />
             </div>
         </QueryClientProvider>
 
@@ -91,8 +85,11 @@ function Header({ dict, setShowCreateDialog }: { dict: any, setShowCreateDialog:
                     size="lg"
                     className="bg-white text-indigo-600 hover:bg-white/90 dark:bg-slate-950"
                 >
-                    <PlusCircle className="mr-2 h-5 w-5" />
-                    {dict.header.newChallenge}
+                    <Link href="/challenges/create" className='flex'>
+                        <PlusCircle className="mr-2 h-5 w-5" />
+                        {dict.header.newChallenge}
+                    </Link>
+
                 </Button>
             </div>
         </div>

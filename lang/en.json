@@ -91,11 +91,13 @@
   "createChallenge": {
     "title": "Create New Challenge",
     "description": "Set up a new savings challenge to track your progress",
+    "inputDescription": "Description (Optional)",
     "name": "Challenge Name",
     "type": "Challenge Type",
     "baseAmount": "Base Amount",
     "currency": "Currency",
-    "create": "Create Challenge"
+    "create": "Create Challenge",
+    "cancel": "Cancel"
   },
   "stats": {
     "totalSaved": {

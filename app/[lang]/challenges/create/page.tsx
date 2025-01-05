@@ -5,6 +5,7 @@ import { useLocalization } from '@/lib/dictionary'
 import { use } from 'react'
 import { useAuthentication } from '@/lib/auth'
 import LoadingSpinner from '@/components/loading-spinner'
+import { CreateChallengeForm } from '@/components/forms/create-challenge-form'
 
 interface PageProps {
     params: Promise<{
@@ -12,7 +13,7 @@ interface PageProps {
     }>;
 }
 
-export default async function CreateChallengePage({ params }: PageProps) {
+export default function CreateChallengePage({ params }: PageProps) {
     const { lang } = use(params);
     const { dictionary, error: dictionaryError } = useLocalization(lang);
     const { user, isLoading: authLoading } = useAuthentication();
@@ -33,7 +34,7 @@ export default async function CreateChallengePage({ params }: PageProps) {
             <main className="flex-1">
                 <div className="container max-w-screen-2xl py-10">
                     <div className="max-w-2xl mx-auto">
-                        {/* <CreateChallengeForm /> */}
+                        <CreateChallengeForm dict={dictionary} />
                     </div>
                 </div>
             </main>
