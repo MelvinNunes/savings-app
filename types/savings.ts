@@ -22,6 +22,7 @@ export interface SavingsChallenge {
   isArchived?: boolean;
   createdAt: string;
   updatedAt: string;
+  isInverted?: boolean;
 }
 
 export const CURRENCIES: Currency[] = [

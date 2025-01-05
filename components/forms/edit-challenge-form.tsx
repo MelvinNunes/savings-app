@@ -13,6 +13,8 @@ import { useRouter } from 'next/navigation'
 import { Icons } from '../icons'
 import { Card, CardContent } from '../ui/card'
 import { useEditChallenge } from '@/data/challenges'
+import { Switch } from '../ui/switch'
+import { calculateMonthlySavings } from '@/utils/calculate-savings'
 
 interface EditChallengeFormProps {
     challenge: SavingsChallenge
@@ -29,9 +31,9 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
     const [baseAmount, setBaseAmount] = useState(challenge.baseAmount.toString())
     const [currencyCode, setCurrencyCode] = useState(challenge.currencyCode)
     const [type, setType] = useState(challenge.type)
+    const [isInverted, setIsInverted] = useState(challenge.isInverted || false)
 
     const router = useRouter()
-    const supabase = createClientComponentClient()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -45,10 +47,14 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                 type,
                 baseAmount: Number(baseAmount),
                 currencyCode,
-                progress: challenge.progress.map(month => ({
-                    ...month,
-                    amount: type === 'fixed' ? Number(baseAmount) : Number(baseAmount) * (challenge.progress.indexOf(month) + 1)
-                })),
+                isInverted,
+                progress: type === 'incremental'
+                    ? calculateMonthlySavings(Number(baseAmount), dict, isInverted)
+                    : Array.from({ length: 12 }, (_, i) => ({
+                        month: new Date(2025, i).toLocaleString('default', { month: 'long' }),
+                        amount: Number(baseAmount),
+                        isCompleted: false
+                    })),
                 updatedAt: new Date().toISOString()
             }
 
@@ -129,6 +135,21 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                                         onValueChange={setCurrencyCode}
                                     />
                                 </div>
+                                {type === 'incremental' && (
+                                    <div className="flex items-center justify-between space-x-2">
+                                        <Label htmlFor="inverted" className="flex flex-col space-y-1">
+                                            <span>Invert Monthly Order</span>
+                                            <span className="font-normal text-sm text-muted-foreground">
+                                                Start with the highest amount and decrease monthly
+                                            </span>
+                                        </Label>
+                                        <Switch
+                                            id="inverted"
+                                            checked={isInverted}
+                                            onCheckedChange={setIsInverted}
+                                        />
+                                    </div>
+                                )}
                             </div>
                         </div>
                         <div className="flex justify-end gap-4">

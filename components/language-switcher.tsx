@@ -27,7 +27,7 @@ export function LanguageSwitcher({ currentLang }: { currentLang: string }) {
                 {languages.map((lang) => (
                     <SelectItem key={lang.code} value={lang.code} >
                         <div className='flex gap-2 items-center'>
-                            <span className='hidden sm:flex'>{lang.name}</span> <Image src={lang.flag} alt="PT flag" width={20} height={20} />
+                            <span className='truncate w-10 sm:w-full'>{lang.name}</span> <Image src={lang.flag} alt="PT flag" width={20} height={20} />
                         </div>
                     </SelectItem>
                 ))}
