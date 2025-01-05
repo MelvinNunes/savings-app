@@ -97,7 +97,9 @@
     "baseAmount": "Base Amount",
     "currency": "Currency",
     "create": "Create Challenge",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "invert": "Invert Monthly Order",
+    "invertDescription": "Start with the highest amount and decrease monthly"
   },
   "editChallenge": {
     "title": "Edit Challenge",
@@ -108,7 +110,9 @@
     "baseAmount": "Base Amount",
     "currency": "Currency",
     "save": "Save Changes",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "invert": "Invert Monthly Order",
+    "invertDescription": "Start with the highest amount and decrease monthly"
   },
   "stats": {
     "totalSaved": {

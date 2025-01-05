@@ -138,9 +138,9 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                                 {type === 'incremental' && (
                                     <div className="flex items-center justify-between space-x-2">
                                         <Label htmlFor="inverted" className="flex flex-col space-y-1">
-                                            <span>Invert Monthly Order</span>
+                                            <span>{dict.createChallenge.invert}</span>
                                             <span className="font-normal text-sm text-muted-foreground">
-                                                Start with the highest amount and decrease monthly
+                                                {dict.createChallenge.invertDescription}
                                             </span>
                                         </Label>
                                         <Switch

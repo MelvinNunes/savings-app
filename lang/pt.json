@@ -97,7 +97,9 @@
     "baseAmount": "Valor Base",
     "currency": "Moeda",
     "create": "Criar Desafio",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "invert": "Inverter Ordem Mensal",
+    "invertDescription": "Comece com o maior valor e diminua mensalmente"
   },
   "editChallenge": {
     "title": "Editar Desafio",
@@ -108,7 +110,9 @@
     "baseAmount": "Valor Base",
     "currency": "Moeda",
     "save": "Guardar Alterações",
-    "cancel": "Cancelar"
+    "cancel": "Cancelar",
+    "invert": "Inverter Ordem Mensal",
+    "invertDescription": "Comece com o maior valor e diminua mensalmente"
   },
   "stats": {
     "totalSaved": {
