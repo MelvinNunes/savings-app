@@ -22,7 +22,7 @@ interface DashboardProps {
 const queryClient = new QueryClient()
 
 export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardProps) {
-    const [showCreateDialog, setShowCreateDialog] = useState(false)
+    const [, setShowCreateDialog] = useState(false)
 
     const totalSaved = challenges.reduce((total, challenge) => {
         const challengeTotal = challenge.progress
@@ -59,7 +59,7 @@ export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardPr
     return (
         <QueryClientProvider client={queryClient}>
             <div className="space-y-8">
-                <Header dict={dict} setShowCreateDialog={setShowCreateDialog} />
+                <Header dict={dict} />
                 <Stats stats={stats} />
                 <Challenges dict={dict} challenges={challenges} isLoading={isLoadingChallenges} />
             </div>
@@ -69,7 +69,7 @@ export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardPr
 }
 
 
-function Header({ dict, setShowCreateDialog }: { dict: any, setShowCreateDialog: Dispatch<SetStateAction<boolean>> }) {
+function Header({ dict }: { dict: any }) {
     return (
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 dark:from-violet-800 to-indigo-600 dark:to-indigo-800 px-8 py-12 text-white">
             <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" />
@@ -81,7 +81,6 @@ function Header({ dict, setShowCreateDialog }: { dict: any, setShowCreateDialog:
                     </p>
                 </div>
                 <Button
-                    onClick={() => setShowCreateDialog(true)}
                     size="lg"
                     className="bg-white text-indigo-600 hover:bg-white/90 dark:bg-slate-950"
                 >
@@ -179,6 +178,15 @@ function Challenges({ dict, challenges, isLoading }: { dict: any, challenges: Sa
                     status = { label: dict.challenges.status.inProgress, icon: Clock, color: 'text-blue-600' }
                 }
 
+                let type
+                if (challenge.type === "fixed") {
+                    type = dict.challengeTypes.fixed.name
+                } else if (challenge.type === "custom") {
+                    type = dict.challengeTypes.fixed.name
+                } else {
+                    type = dict.challengeTypes.incremental.name
+                }
+
                 return (
                     <motion.div
                         key={challenge.id}
@@ -194,7 +202,7 @@ function Challenges({ dict, challenges, isLoading }: { dict: any, challenges: Sa
                                             <div className="flex items-center gap-2">
                                                 <h3 className="font-semibold">{challenge.name}</h3>
                                                 <Badge variant="outline" className="font-normal">
-                                                    {challenge.type}
+                                                    {type}
                                                 </Badge>
                                             </div>
                                             {challenge.description && (

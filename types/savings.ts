@@ -33,3 +33,23 @@ export const CURRENCIES: Currency[] = [
   { code: "AUD", symbol: "A$", name: "Australian Dollar" },
   { code: "AOA", symbol: "Kz", name: "Kwanza" },
 ];
+
+export function challengesTypes(dict: any) {
+  return [
+    {
+      id: "incremental",
+      name: dict.challengeTypes.incremental.name,
+      description: dict.challengeTypes.incremental.description,
+    },
+    {
+      id: "fixed",
+      name: dict.challengeTypes.fixed.name,
+      description: dict.challengeTypes.fixed.description,
+    },
+    {
+      id: "custom",
+      name: dict.challengeTypes.custom.name,
+      description: dict.challengeTypes.custom.description,
+    },
+  ];
+}
