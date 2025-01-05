@@ -1,16 +1,15 @@
 'use client'
 
 import { useState } from 'react'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { Icons } from './icons'
 import { Card, CardContent } from '@/components/ui/card'
 import { Alert, AlertDescription } from '@/components/ui/alert'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useRouter } from 'next/navigation'
-import { useLoginWithGoogle, useLoginWithPassword, useRegisterWithPassword } from '@/lib/auth'
+import { useLoginWithPassword, useRegisterWithPassword } from '@/lib/auth'
+import { Icons } from '../icons'
 
 interface AuthFormProps {
     lang: string
