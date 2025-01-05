@@ -91,11 +91,28 @@
   "createChallenge": {
     "title": "Create New Challenge",
     "description": "Set up a new savings challenge to track your progress",
+    "inputDescription": "Description (Optional)",
     "name": "Challenge Name",
     "type": "Challenge Type",
     "baseAmount": "Base Amount",
     "currency": "Currency",
-    "create": "Create Challenge"
+    "create": "Create Challenge",
+    "cancel": "Cancel",
+    "invert": "Invert Monthly Order",
+    "invertDescription": "Start with the highest amount and decrease monthly"
+  },
+  "editChallenge": {
+    "title": "Edit Challenge",
+    "description": "Update your savings challenge details",
+    "inputDescription": "Description (Optional)",
+    "name": "Challenge Name",
+    "type": "Challenge Type",
+    "baseAmount": "Base Amount",
+    "currency": "Currency",
+    "save": "Save Changes",
+    "cancel": "Cancel",
+    "invert": "Invert Monthly Order",
+    "invertDescription": "Start with the highest amount and decrease monthly"
   },
   "stats": {
     "totalSaved": {
@@ -134,5 +151,34 @@
       "name": "Custom Savings Plan",
       "description": "Set your own monthly savings targets"
     }
+  },
+  "challengeDetails": {
+    "detailedAnalytics": "Detailed Analytics",
+    "completionRate": "Completion Rate",
+    "savingRate": "Savings Rate",
+    "target": "Target",
+    "of": "of",
+    "baseAmount": "Base Amount",
+    "monthlyGrowth": "Monthly Growth",
+    "projectEnd": "Projected End",
+    "daysRemaining": "days remaining",
+    "back": "Back",
+    "edit": "Edit",
+    "archive": "Archive",
+    "unarchive": "Unarchive",
+    "delete": "Delete",
+    "areYouSure": "Are you sure?",
+    "deleteConfirmation": "This action cannot be undone. This will permanently delete the savings challenge and remove all associated data.",
+    "cancel": "Cancel",
+    "progressOverview": "Progress Overview",
+    "monthlyBreakdown": "Monthly Breakdown",
+    "totalProgress": "Total Progress",
+    "started": "Started",
+    "monthsCompleted": "{{completed}} of {{total}} months completed",
+    "percentComplete": "{{progress}}% complete",
+    "completed": "Completed!",
+    "active": "Active",
+    "archived": "Archived",
+    "total": "total"
   }
 }

@@ -2,7 +2,8 @@ import { MonthlyTarget } from "../types/savings";
 
 export function calculateMonthlySavings(
   baseAmount: number,
-  dict: any
+  dict: any,
+  isInverted: boolean = false
 ): MonthlyTarget[] {
   const months = [
     dict.months.january,
@@ -20,7 +21,8 @@ export function calculateMonthlySavings(
   ];
 
   return months.map((month, index) => {
-    const amount = baseAmount * (index + 1);
+    const multiplier = isInverted ? 12 - index : index + 1;
+    const amount = baseAmount * multiplier;
     return {
       month,
       amount,

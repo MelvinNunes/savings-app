@@ -20,14 +20,14 @@ export function LanguageSwitcher({ currentLang }: { currentLang: string }) {
 
     return (
         <Select value={currentLang} onValueChange={handleLanguageChange}>
-            <SelectTrigger className="w-[140px] dark:border-slate-600">
+            <SelectTrigger className="sm:w-[140px] dark:border-slate-600">
                 <SelectValue placeholder="Select language" />
             </SelectTrigger>
             <SelectContent>
                 {languages.map((lang) => (
                     <SelectItem key={lang.code} value={lang.code} >
                         <div className='flex gap-2 items-center'>
-                            {lang.name} <Image src={lang.flag} alt="PT flag" width={20} height={20} />
+                            <span className='truncate w-10 sm:w-full'>{lang.name}</span> <Image src={lang.flag} alt="PT flag" width={20} height={20} />
                         </div>
                     </SelectItem>
                 ))}

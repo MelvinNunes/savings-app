@@ -91,11 +91,28 @@
   "createChallenge": {
     "title": "Criar Novo Desafio",
     "description": "Configure um novo desafio de poupança para acompanhar seu progresso",
+    "inputDescription": "Descrição (Opcional)",
     "name": "Nome do Desafio",
     "type": "Tipo de Desafio",
     "baseAmount": "Valor Base",
     "currency": "Moeda",
-    "create": "Criar Desafio"
+    "create": "Criar Desafio",
+    "cancel": "Cancelar",
+    "invert": "Inverter Ordem Mensal",
+    "invertDescription": "Comece com o maior valor e diminua mensalmente"
+  },
+  "editChallenge": {
+    "title": "Editar Desafio",
+    "description": "Edite o seu desafio de poupança para acompanhar o seu progresso",
+    "inputDescription": "Descrição (Opcional)",
+    "name": "Nome do Desafio",
+    "type": "Tipo de Desafio",
+    "baseAmount": "Valor Base",
+    "currency": "Moeda",
+    "save": "Guardar Alterações",
+    "cancel": "Cancelar",
+    "invert": "Inverter Ordem Mensal",
+    "invertDescription": "Comece com o maior valor e diminua mensalmente"
   },
   "stats": {
     "totalSaved": {
@@ -134,5 +151,34 @@
       "name": "Plano de Poupança Personalizado",
       "description": "Defina suas próprias metas de poupança mensal"
     }
+  },
+  "challengeDetails": {
+    "detailedAnalytics": "Análises Detalhadas",
+    "completionRate": "Taxa de Conclusão",
+    "savingRate": "Taxa de Poupança",
+    "target": "Meta",
+    "of": "de",
+    "baseAmount": "Valor Base",
+    "monthlyGrowth": "Crescimento Mensal",
+    "projectEnd": "Fim Previsto",
+    "daysRemaining": "dias restantes",
+    "back": "Voltar",
+    "edit": "Editar",
+    "archive": "Arquivar",
+    "unarchive": "Desarquivar",
+    "delete": "Excluir",
+    "areYouSure": "Tem certeza?",
+    "deleteConfirmation": "Essa ação não pode ser desfeita. Isso excluirá permanentemente o desafio de poupança e removerá todos os dados associados.",
+    "cancel": "Cancelar",
+    "progressOverview": "Visão Geral do Progresso",
+    "monthlyBreakdown": "Divisão Mensal",
+    "totalProgress": "Progresso Total",
+    "started": "Iniciado",
+    "monthsCompleted": "{{completed}} de {{total}} meses concluídos",
+    "percentComplete": "{{progress}}% concluído",
+    "completed": "Concluído!",
+    "active": "Ativo",
+    "archived": "Arquivado",
+    "total": "total"
   }
 }

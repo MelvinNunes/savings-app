@@ -4,8 +4,7 @@ import { Dispatch, ForwardRefExoticComponent, RefAttributes, SetStateAction, use
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Archive, ArrowUpRight, CheckCircle2, Clock, LucideProps, PlusCircle, TrendingUp, Wallet } from 'lucide-react'
-import { SavingsChallenge } from '@/types/savings'
-import { CreateChallengeDialog } from './create-challenge-dialog'
+import { resolveChallengeType, SavingsChallenge } from '@/types/savings'
 import { motion } from 'framer-motion'
 import { formatCurrency } from '@/utils/format-currency'
 import Link from 'next/link'
@@ -23,7 +22,7 @@ interface DashboardProps {
 const queryClient = new QueryClient()
 
 export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardProps) {
-    const [showCreateDialog, setShowCreateDialog] = useState(false)
+    const [, setShowCreateDialog] = useState(false)
 
     const totalSaved = challenges.reduce((total, challenge) => {
         const challengeTotal = challenge.progress
@@ -60,14 +59,9 @@ export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardPr
     return (
         <QueryClientProvider client={queryClient}>
             <div className="space-y-8">
-                <Header dict={dict} setShowCreateDialog={setShowCreateDialog} />
+                <Header dict={dict} />
                 <Stats stats={stats} />
                 <Challenges dict={dict} challenges={challenges} isLoading={isLoadingChallenges} />
-                <CreateChallengeDialog
-                    open={showCreateDialog}
-                    onOpenChange={setShowCreateDialog}
-                    dict={dict}
-                />
             </div>
         </QueryClientProvider>
 
@@ -75,7 +69,7 @@ export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardPr
 }
 
 
-function Header({ dict, setShowCreateDialog }: { dict: any, setShowCreateDialog: Dispatch<SetStateAction<boolean>> }) {
+function Header({ dict }: { dict: any }) {
     return (
         <div className="relative overflow-hidden rounded-lg bg-gradient-to-r from-violet-600 dark:from-violet-800 to-indigo-600 dark:to-indigo-800 px-8 py-12 text-white">
             <div className="absolute inset-0 bg-grid-white/10 [mask-image:linear-gradient(0deg,rgba(255,255,255,0.1),rgba(255,255,255,0.5))]" />
@@ -87,12 +81,14 @@ function Header({ dict, setShowCreateDialog }: { dict: any, setShowCreateDialog:
                     </p>
                 </div>
                 <Button
-                    onClick={() => setShowCreateDialog(true)}
                     size="lg"
                     className="bg-white text-indigo-600 hover:bg-white/90 dark:bg-slate-950"
                 >
-                    <PlusCircle className="mr-2 h-5 w-5" />
-                    {dict.header.newChallenge}
+                    <Link href="/challenges/create" className='flex'>
+                        <PlusCircle className="mr-2 h-5 w-5" />
+                        {dict.header.newChallenge}
+                    </Link>
+
                 </Button>
             </div>
         </div>
@@ -189,7 +185,7 @@ function Challenges({ dict, challenges, isLoading }: { dict: any, challenges: Sa
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                     >
-                        <Link href={`#`}>
+                        <Link href={`/challenges/${challenge.id}`}>
                             <Card className="cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1">
                                 <CardContent className="p-6">
                                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
@@ -197,7 +193,7 @@ function Challenges({ dict, challenges, isLoading }: { dict: any, challenges: Sa
                                             <div className="flex items-center gap-2">
                                                 <h3 className="font-semibold">{challenge.name}</h3>
                                                 <Badge variant="outline" className="font-normal">
-                                                    {challenge.type}
+                                                    {resolveChallengeType(challenge.type, dict)}
                                                 </Badge>
                                             </div>
                                             {challenge.description && (

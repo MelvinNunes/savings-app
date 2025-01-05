@@ -39,6 +39,8 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
         calculateMonthlySavings(200, dict)
     )
     const [showConfetti, setShowConfetti] = useState(false)
+    const [loadingMonth, setLoadingMonth] = useState<number | null>(null)
+
     const supabase = createClientComponentClient()
 
     const currency = CURRENCIES.find(c => c.code === currencyCode) || CURRENCIES[0]
@@ -93,6 +95,7 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
     const toggleMonthCompletion = async (index: number) => {
         try {
             setIsSaving(true)
+            setLoadingMonth(index)
             setError(null)
 
             const newSavings = monthlySavings.map((saving, i) =>
@@ -134,6 +137,7 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
             }
         } finally {
             setIsSaving(false)
+            setLoadingMonth(null)
         }
     }
 
@@ -236,7 +240,11 @@ export default function SavingsCalculator({ lang, dict, isAuthenticated }: Savin
                                             <div className="flex items-center justify-between">
                                                 <div className="font-medium">{saving.month}</div>
                                                 <div className={`transition-colors ${saving.isCompleted ? 'text-violet-600 font-semibold' : ''}`}>
-                                                    {formatCurrency(saving.amount, currency)}
+                                                    {loadingMonth === index ? (
+                                                        <Icons.spinner className="h-4 w-4 animate-spin" />
+                                                    ) : (
+                                                        formatCurrency(saving.amount, currency)
+                                                    )}
                                                 </div>
                                             </div>
                                             {saving.isCompleted && (

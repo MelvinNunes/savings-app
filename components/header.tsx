@@ -13,8 +13,6 @@ import {
 } from '@/components/ui/dropdown-menu'
 import { ChevronDown, LayoutDashboard, LogOut, PiggyBank, User } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { Icons } from './icons'
-import { useState } from 'react'
 import AuthSheet from './auth-sheet'
 import { LanguageSwitcher } from './language-switcher'
 import { ThemeSwitcher } from './theme-switcher'
