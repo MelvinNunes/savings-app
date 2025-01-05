@@ -32,6 +32,7 @@ import {
     AlertDialogHeader,
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
+import { useArchiveChallenge, useDeleteChallenge, useUpdateChallengeProgress } from '@/data/challenges'
 
 interface ChallengeDetailsProps {
     challenge: SavingsChallenge
@@ -63,14 +64,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
                 i === index ? { ...month, isCompleted: !month.isCompleted } : month
             )
 
-            const { error } = await supabase
-                .from('savings_challenges')
-                .update({
-                    progress: newProgress,
-                    updated_at: new Date().toISOString()
-                })
-                .eq('id', challenge.id)
-
+            const error = await useUpdateChallengeProgress(challenge.id, newProgress)
             if (error) throw error
 
             setChallenge(prev => ({
@@ -88,14 +82,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
     const handleArchive = async () => {
         try {
             setIsLoading(true)
-            const { error } = await supabase
-                .from('savings_challenges')
-                .update({
-                    is_archived: !challenge.isArchived,
-                    updated_at: new Date().toISOString()
-                })
-                .eq('id', challenge.id)
-
+            const error = await useArchiveChallenge(challenge.id, !challenge.isArchived)
             if (error) throw error
 
             setChallenge(prev => ({
@@ -113,11 +100,8 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
     const handleDelete = async () => {
         try {
             setIsLoading(true)
-            const { error } = await supabase
-                .from('savings_challenges')
-                .delete()
-                .eq('id', challenge.id)
 
+            const error = await useDeleteChallenge(challenge.id)
             if (error) throw error
 
             router.push('/')

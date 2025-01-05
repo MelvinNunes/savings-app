@@ -12,6 +12,7 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { Icons } from '../icons'
 import { Card, CardContent } from '../ui/card'
+import { useEditChallenge } from '@/data/challenges'
 
 interface EditChallengeFormProps {
     challenge: SavingsChallenge
@@ -51,11 +52,7 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                 updatedAt: new Date().toISOString()
             }
 
-            const { error } = await supabase
-                .from('savings_challenges')
-                .update(updatedChallenge)
-                .eq('id', challenge.id)
-
+            const error = await useEditChallenge(challenge.id, updatedChallenge)
             if (error) throw error
 
             onSave(updatedChallenge)
