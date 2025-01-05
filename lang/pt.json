@@ -99,6 +99,17 @@
     "create": "Criar Desafio",
     "cancel": "Cancelar"
   },
+  "editChallenge": {
+    "title": "Editar Desafio",
+    "description": "Edite o seu desafio de poupança para acompanhar o seu progresso",
+    "inputDescription": "Descrição (Opcional)",
+    "name": "Nome do Desafio",
+    "type": "Tipo de Desafio",
+    "baseAmount": "Valor Base",
+    "currency": "Moeda",
+    "save": "Guardar Alterações",
+    "cancel": "Cancelar"
+  },
   "stats": {
     "totalSaved": {
       "title": "Total Poupado",
@@ -138,6 +149,15 @@
     }
   },
   "challengeDetails": {
+    "detailedAnalytics": "Análises Detalhadas",
+    "completionRate": "Taxa de Conclusão",
+    "savingRate": "Taxa de Poupança",
+    "target": "Meta",
+    "of": "de",
+    "baseAmount": "Valor Base",
+    "monthlyGrowth": "Crescimento Mensal",
+    "projectEnd": "Fim Previsto",
+    "daysRemaining": "dias restantes",
     "back": "Voltar",
     "edit": "Editar",
     "archive": "Arquivar",
@@ -154,6 +174,7 @@
     "percentComplete": "{{progress}}% concluído",
     "completed": "Concluído!",
     "active": "Ativo",
-    "archived": "Arquivado"
+    "archived": "Arquivado",
+    "total": "total"
   }
 }

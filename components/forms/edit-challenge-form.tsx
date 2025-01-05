@@ -67,9 +67,9 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
     return (
         <div className="space-y-6">
             <div>
-                <h1 className="text-2xl font-bold tracking-tight">Edit Challenge</h1>
+                <h1 className="text-2xl font-bold tracking-tight">{dict.editChallenge.title}</h1>
                 <p className="text-muted-foreground">
-                    Update your savings challenge details
+                    {dict.editChallenge.description}
                 </p>
             </div>
 
@@ -78,7 +78,7 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div className="space-y-4">
                             <div className="space-y-2">
-                                <Label htmlFor="name">Challenge Name</Label>
+                                <Label htmlFor="name">{dict.editChallenge.name}</Label>
                                 <Input
                                     id="name"
                                     value={name}
@@ -87,7 +87,7 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label htmlFor="description">Description (optional)</Label>
+                                <Label htmlFor="description">{dict.editChallenge.inputDescription}</Label>
                                 <Textarea
                                     id="description"
                                     value={description}
@@ -95,7 +95,7 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                                 />
                             </div>
                             <div className="space-y-2">
-                                <Label>Challenge Type</Label>
+                                <Label>{dict.editChallenge.type}</Label>
                                 <RadioGroup value={type} onValueChange={(value: string) => setType(value as "incremental" | "fixed" | "custom")} className="grid gap-4">
                                     {challengesTypes(dict).map((challengeType) => (
                                         <div key={challengeType.id} className="flex items-start space-x-3">
@@ -112,7 +112,7 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                             </div>
                             <div className="grid gap-4 sm:grid-cols-2">
                                 <div className="space-y-2">
-                                    <Label htmlFor="baseAmount">Base Amount</Label>
+                                    <Label htmlFor="baseAmount">{dict.editChallenge.baseAmount}</Label>
                                     <Input
                                         id="baseAmount"
                                         type="number"
@@ -123,7 +123,7 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                                     />
                                 </div>
                                 <div className="space-y-2">
-                                    <Label>Currency</Label>
+                                    <Label>{dict.editChallenge.currency}</Label>
                                     <CurrencySelector
                                         value={currencyCode}
                                         onValueChange={setCurrencyCode}
@@ -137,13 +137,13 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                                 variant="outline"
                                 onClick={onCancel}
                             >
-                                Cancel
+                                {dict.editChallenge.cancel}
                             </Button>
                             <Button type="submit" disabled={isLoading}>
                                 {isLoading && (
                                     <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                                 )}
-                                Save Changes
+                                {dict.editChallenge.save}
                             </Button>
                         </div>
                     </form>

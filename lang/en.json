@@ -99,6 +99,17 @@
     "create": "Create Challenge",
     "cancel": "Cancel"
   },
+  "editChallenge": {
+    "title": "Edit Challenge",
+    "description": "Update your savings challenge details",
+    "inputDescription": "Description (Optional)",
+    "name": "Challenge Name",
+    "type": "Challenge Type",
+    "baseAmount": "Base Amount",
+    "currency": "Currency",
+    "save": "Save Changes",
+    "cancel": "Cancel"
+  },
   "stats": {
     "totalSaved": {
       "title": "Total Saved",
@@ -138,6 +149,15 @@
     }
   },
   "challengeDetails": {
+    "detailedAnalytics": "Detailed Analytics",
+    "completionRate": "Completion Rate",
+    "savingRate": "Savings Rate",
+    "target": "Target",
+    "of": "of",
+    "baseAmount": "Base Amount",
+    "monthlyGrowth": "Monthly Growth",
+    "projectEnd": "Projected End",
+    "daysRemaining": "days remaining",
     "back": "Back",
     "edit": "Edit",
     "archive": "Archive",
@@ -154,6 +174,7 @@
     "percentComplete": "{{progress}}% complete",
     "completed": "Completed!",
     "active": "Active",
-    "archived": "Archived"
+    "archived": "Archived",
+    "total": "total"
   }
 }

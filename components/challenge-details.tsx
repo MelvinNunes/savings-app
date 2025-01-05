@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Archive, ArrowLeft, Calendar, Edit2, MoreVertical, Sparkles, Trash2 } from 'lucide-react'
+import { Archive, ArrowLeft, BanknoteIcon, Calendar, Edit2, LineChart, MoreVertical, Sparkles, Target, Trash2 } from 'lucide-react'
 import { resolveChallengeType, SavingsChallenge } from '@/types/savings'
 import { motion } from 'framer-motion'
 import { formatCurrency } from '@/utils/format-currency'
@@ -33,6 +33,8 @@ import {
     AlertDialogTitle,
 } from '@/components/ui/alert-dialog'
 import { useArchiveChallenge, useDeleteChallenge, useUpdateChallengeProgress } from '@/data/challenges'
+import { InsightsCard } from './insights-card'
+import { calculateYearTotal } from '@/utils/calculate-savings'
 
 interface ChallengeDetailsProps {
     challenge: SavingsChallenge
@@ -44,8 +46,8 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
     const [isEditing, setIsEditing] = useState(false)
     const [isDeleting, setIsDeleting] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
+    const [loadingMonth, setLoadingMonth] = useState<number | null>(null)
     const router = useRouter()
-    const supabase = createClientComponentClient()
 
     const currency = CURRENCIES.find(c => c.code === challenge.currencyCode) || CURRENCIES[0]
     const completedCount = challenge.progress.filter(m => m.isCompleted).length
@@ -60,6 +62,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
     const handleToggleMonth = async (index: number) => {
         try {
             setIsLoading(true)
+            setLoadingMonth(index)
             const newProgress = challenge.progress.map((month, i) =>
                 i === index ? { ...month, isCompleted: !month.isCompleted } : month
             )
@@ -76,6 +79,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
             console.error('Error updating progress:', error)
         } finally {
             setIsLoading(false)
+            setLoadingMonth(null)
         }
     }
 
@@ -128,6 +132,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
         )
     }
 
+    const yearTotal = calculateYearTotal(challenge.baseAmount)
 
     return (
         <div className="space-y-6">
@@ -178,6 +183,114 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
                     </DropdownMenu>
                 </div>
             </div>
+
+            <Card>
+                <CardHeader>
+                    <CardTitle>{dict.challengeDetails.detailedAnalytics}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-6">
+                    <div className="grid gap-6 md:grid-cols-2">
+                        <div className="space-y-2">
+                            <h3 className="font-semibold">{dict.challengeDetails.completionRate}</h3>
+                            <div className="flex items-center justify-between text-sm">
+                                <div className="grid gap-0.5">
+                                    <div className="font-medium">{(completedCount / totalMonths * 100).toFixed(1)}%</div>
+                                    <div className="text-xs text-muted-foreground">{dict.challengeDetails.target}: 100%</div>
+                                </div>
+                                <div className="grid gap-0.5 text-right">
+                                    <div className="font-medium">{completedCount} {dict.dashboard.months}</div>
+                                    <div className="text-xs text-muted-foreground">{dict.challengeDetails.of} {totalMonths} {dict.challengeDetails.total}</div>
+                                </div>
+                            </div>
+                            <Progress value={completedCount / totalMonths * 100} className="h-2" />
+                        </div>
+
+                        <div className="space-y-2">
+                            <h3 className="font-semibold">{dict.challengeDetails.savingRate}</h3>
+                            <div className="flex items-center justify-between text-sm">
+                                <div className="grid gap-0.5">
+                                    <div className="font-medium">{(totalSaved / totalTarget * 100).toFixed(1)}%</div>
+                                    <div className="text-xs text-muted-foreground">
+                                        {dict.challengeDetails.target}: {formatCurrency(totalTarget, currency)}
+                                    </div>
+                                </div>
+                                <div className="grid gap-0.5 text-right">
+                                    <div className="font-medium">{formatCurrency(totalSaved, currency)}</div>
+                                    <div className="text-xs text-muted-foreground">
+                                        {dict.challengeDetails.of} {formatCurrency(totalTarget, currency)}
+                                    </div>
+                                </div>
+                            </div>
+                            <Progress value={totalSaved / totalTarget * 100} className="h-2" />
+                        </div>
+                    </div>
+
+                    <div className="grid gap-4 md:grid-cols-3">
+                        <Card>
+                            <CardContent className="pt-6">
+                                <div className="flex items-center gap-2">
+                                    <BanknoteIcon className="h-4 w-4 text-muted-foreground" />
+                                    <h3 className="font-semibold">{dict.challengeDetails.baseAmount}</h3>
+                                </div>
+                                <div className="mt-2 grid gap-1">
+                                    <div className="text-2xl font-bold">
+                                        {formatCurrency(challenge.baseAmount, currency)}
+                                    </div>
+                                    <p className="text-xs text-muted-foreground">
+                                        {resolveChallengeType(challenge.type, dict)}
+                                    </p>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card>
+                            <CardContent className="pt-6">
+                                <div className="flex items-center gap-2">
+                                    <LineChart className="h-4 w-4 text-muted-foreground" />
+                                    <h3 className="font-semibold">{dict.challengeDetails.monthlyGrowth}</h3>
+                                </div>
+                                <div className="mt-2 grid gap-1">
+                                    <div className="text-2xl font-bold">
+                                        {challenge.type === 'fixed' ? '0%' : '100%'}
+                                    </div>
+                                    <p className="text-xs text-muted-foreground">
+                                        {resolveChallengeType(challenge.type, dict)}
+                                    </p>
+                                </div>
+                            </CardContent>
+                        </Card>
+
+                        <Card>
+                            <CardContent className="pt-6">
+                                <div className="flex items-center gap-2">
+                                    <Target className="h-4 w-4 text-muted-foreground" />
+                                    <h3 className="font-semibold">{dict.challengeDetails.projectEnd}</h3>
+                                </div>
+                                <div className="mt-2 grid gap-1">
+                                    <div className="text-2xl font-bold">
+                                        {new Date(new Date(challenge.startDate).setFullYear(new Date(challenge.startDate).getFullYear() + 1)).toLocaleDateString('default', {
+                                            month: 'short',
+                                            year: 'numeric'
+                                        })
+                                        }
+                                    </div>
+                                    <p className="text-xs text-muted-foreground">
+                                        {Math.round((new Date(new Date(challenge.startDate).setFullYear(new Date(challenge.startDate).getFullYear() + 1)).getTime() - Date.now()) / (1000 * 60 * 60 * 24))} {dict.challengeDetails.daysRemaining}
+                                    </p>
+                                </div>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </CardContent>
+            </Card>
+
+            <InsightsCard
+                monthlySavings={challenge.progress}
+                baseAmount={challenge.baseAmount}
+                yearTotal={yearTotal}
+                currency={currency}
+                dict={dict}
+            />
 
             <div className="grid gap-6 md:grid-cols-2">
                 <Card>
@@ -244,7 +357,11 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
                                                 <div className="flex items-center justify-between">
                                                     <div className="font-medium">{month.month}</div>
                                                     <div className={`transition-colors ${month.isCompleted ? 'text-violet-600 font-semibold' : ''}`}>
-                                                        {formatCurrency(month.amount, currency)}
+                                                        {loadingMonth === index ? (
+                                                            <Icons.spinner className="h-4 w-4 animate-spin" />
+                                                        ) : (
+                                                            formatCurrency(month.amount, currency)
+                                                        )}
                                                     </div>
                                                 </div>
                                                 {month.isCompleted && (
@@ -280,7 +397,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
                             {isLoading && (
                                 <Icons.spinner className="mr-2 h-4 w-4 animate-spin" />
                             )}
-                            Delete
+                            {dict.challengeDetails.delete}
                         </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
