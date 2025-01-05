@@ -7,7 +7,7 @@ import {
     SheetTitle,
     SheetTrigger,
 } from '@/components/ui/sheet'
-import { AuthForm } from './auth-form'
+import { AuthForm } from './forms/auth-form'
 
 interface AuthSheetProps {
     lang: string

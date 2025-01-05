@@ -1,15 +1,6 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
-import {
-    Sheet,
-    SheetContent,
-    SheetDescription,
-    SheetHeader,
-    SheetTitle,
-    SheetTrigger,
-} from '@/components/ui/sheet'
-import { AuthForm } from './auth-form'
+
 import { Sparkles } from 'lucide-react'
 import AuthSheet from './auth-sheet'
 
