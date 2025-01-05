@@ -4,7 +4,7 @@ import { Dispatch, ForwardRefExoticComponent, RefAttributes, SetStateAction, use
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Archive, ArrowUpRight, CheckCircle2, Clock, LucideProps, PlusCircle, TrendingUp, Wallet } from 'lucide-react'
-import { SavingsChallenge } from '@/types/savings'
+import { resolveChallengeType, SavingsChallenge } from '@/types/savings'
 import { motion } from 'framer-motion'
 import { formatCurrency } from '@/utils/format-currency'
 import Link from 'next/link'
@@ -178,15 +178,6 @@ function Challenges({ dict, challenges, isLoading }: { dict: any, challenges: Sa
                     status = { label: dict.challenges.status.inProgress, icon: Clock, color: 'text-blue-600' }
                 }
 
-                let type
-                if (challenge.type === "fixed") {
-                    type = dict.challengeTypes.fixed.name
-                } else if (challenge.type === "custom") {
-                    type = dict.challengeTypes.fixed.name
-                } else {
-                    type = dict.challengeTypes.incremental.name
-                }
-
                 return (
                     <motion.div
                         key={challenge.id}
@@ -202,7 +193,7 @@ function Challenges({ dict, challenges, isLoading }: { dict: any, challenges: Sa
                                             <div className="flex items-center gap-2">
                                                 <h3 className="font-semibold">{challenge.name}</h3>
                                                 <Badge variant="outline" className="font-normal">
-                                                    {type}
+                                                    {resolveChallengeType(challenge.type, dict)}
                                                 </Badge>
                                             </div>
                                             {challenge.description && (

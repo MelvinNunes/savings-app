@@ -136,5 +136,24 @@
       "name": "Plano de Poupança Personalizado",
       "description": "Defina suas próprias metas de poupança mensal"
     }
+  },
+  "challengeDetails": {
+    "back": "Voltar",
+    "edit": "Editar",
+    "archive": "Arquivar",
+    "unarchive": "Desarquivar",
+    "delete": "Excluir",
+    "areYouSure": "Tem certeza?",
+    "deleteConfirmation": "Essa ação não pode ser desfeita. Isso excluirá permanentemente o desafio de poupança e removerá todos os dados associados.",
+    "cancel": "Cancelar",
+    "progressOverview": "Visão Geral do Progresso",
+    "monthlyBreakdown": "Divisão Mensal",
+    "totalProgress": "Progresso Total",
+    "started": "Iniciado",
+    "monthsCompleted": "{{completed}} de {{total}} meses concluídos",
+    "percentComplete": "{{progress}}% concluído",
+    "completed": "Concluído!",
+    "active": "Ativo",
+    "archived": "Arquivado"
   }
 }

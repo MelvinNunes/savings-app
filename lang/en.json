@@ -136,5 +136,24 @@
       "name": "Custom Savings Plan",
       "description": "Set your own monthly savings targets"
     }
+  },
+  "challengeDetails": {
+    "back": "Back",
+    "edit": "Edit",
+    "archive": "Archive",
+    "unarchive": "Unarchive",
+    "delete": "Delete",
+    "areYouSure": "Are you sure?",
+    "deleteConfirmation": "This action cannot be undone. This will permanently delete the savings challenge and remove all associated data.",
+    "cancel": "Cancel",
+    "progressOverview": "Progress Overview",
+    "monthlyBreakdown": "Monthly Breakdown",
+    "totalProgress": "Total Progress",
+    "started": "Started",
+    "monthsCompleted": "{{completed}} of {{total}} months completed",
+    "percentComplete": "{{progress}}% complete",
+    "completed": "Completed!",
+    "active": "Active",
+    "archived": "Archived"
   }
 }

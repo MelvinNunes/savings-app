@@ -53,3 +53,14 @@ export function challengesTypes(dict: any) {
     },
   ];
 }
+
+export function resolveChallengeType(type: string, dict: any) {
+  if (type === "fixed") {
+    type = dict.challengeTypes.fixed.name;
+  } else if (type === "custom") {
+    type = dict.challengeTypes.fixed.name;
+  } else {
+    type = dict.challengeTypes.incremental.name;
+  }
+  return type;
+}

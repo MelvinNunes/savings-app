@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { Archive, ArrowLeft, Calendar, Edit2, MoreVertical, Sparkles, Trash2 } from 'lucide-react'
-import { SavingsChallenge } from '@/types/savings'
+import { resolveChallengeType, SavingsChallenge } from '@/types/savings'
 import { motion } from 'framer-motion'
 import { formatCurrency } from '@/utils/format-currency'
 import Link from 'next/link'
@@ -128,6 +128,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
         )
     }
 
+
     return (
         <div className="space-y-6">
             <div className="flex items-center justify-between">
@@ -152,7 +153,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
                         disabled={isLoading}
                     >
                         <Edit2 className="h-4 w-4" />
-                        Edit
+                        {dict.challengeDetails.edit}
                     </Button>
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
@@ -163,7 +164,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
                         <DropdownMenuContent align="end">
                             <DropdownMenuItem onClick={handleArchive}>
                                 <Archive className="mr-2 h-4 w-4" />
-                                {challenge.isArchived ? 'Unarchive' : 'Archive'}
+                                {challenge.isArchived ? dict.challengeDetails.unarchive : dict.challengeDetails.archive}
                             </DropdownMenuItem>
                             <DropdownMenuSeparator />
                             <DropdownMenuItem
@@ -171,7 +172,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
                                 className="text-red-600"
                             >
                                 <Trash2 className="mr-2 h-4 w-4" />
-                                Delete
+                                {dict.challengeDetails.delete}
                             </DropdownMenuItem>
                         </DropdownMenuContent>
                     </DropdownMenu>
@@ -181,39 +182,39 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
             <div className="grid gap-6 md:grid-cols-2">
                 <Card>
                     <CardHeader>
-                        <CardTitle>Progress Overview</CardTitle>
+                        <CardTitle>{dict.challengeDetails.progressOverview}</CardTitle>
                     </CardHeader>
                     <CardContent className="space-y-4">
                         <div className="flex items-center justify-between">
                             <div className="flex items-center gap-2">
                                 <Badge variant="outline">
-                                    {challenge.type}
+                                    {resolveChallengeType(challenge.type, dict)}
                                 </Badge>
                                 <Badge
                                     variant={challenge.isArchived ? 'secondary' : 'default'}
                                 >
-                                    {challenge.isArchived ? 'Archived' : 'Active'}
+                                    {challenge.isArchived ? dict.challengeDetails.archived : dict.challengeDetails.active}
                                 </Badge>
                             </div>
                             <div className="flex items-center gap-2 text-sm">
                                 <Calendar className="h-4 w-4 text-muted-foreground" />
                                 <span className="text-muted-foreground">
-                                    Started {new Date(challenge.startDate).toLocaleDateString()}
+                                    {dict.challengeDetails.started} {new Date(challenge.startDate).toLocaleDateString()}
                                 </span>
                             </div>
                         </div>
 
                         <div className="space-y-2">
                             <div className="flex justify-between text-sm">
-                                <span className="font-medium">Total Progress</span>
+                                <span className="font-medium">{dict.challengeDetails.totalProgress}</span>
                                 <span>
                                     {formatCurrency(totalSaved, currency)} / {formatCurrency(totalTarget, currency)}
                                 </span>
                             </div>
                             <Progress value={progress} className="h-2" />
                             <div className="flex justify-between text-xs text-muted-foreground">
-                                <span>{completedCount} of {totalMonths} months completed</span>
-                                <span>{progress.toFixed(0)}% complete</span>
+                                <span>{dict.challengeDetails.monthsCompleted.replace("{{completed}}", completedCount).replace("{{total}}", totalMonths)}</span>
+                                <span>{dict.challengeDetails.percentComplete.replace("{{progress}}", progress.toFixed(0))}</span>
                             </div>
                         </div>
                     </CardContent>
@@ -221,7 +222,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
 
                 <Card>
                     <CardHeader>
-                        <CardTitle>Monthly Breakdown</CardTitle>
+                        <CardTitle>{dict.challengeDetails.monthlyBreakdown}</CardTitle>
                     </CardHeader>
                     <CardContent>
                         <div className="space-y-2">
@@ -249,7 +250,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
                                                 {month.isCompleted && (
                                                     <div className="mt-2 text-xs text-violet-600 flex items-center gap-1">
                                                         <Sparkles className="h-3 w-3" />
-                                                        Completed!
+                                                        {dict.challengeDetails.completed}
                                                     </div>
                                                 )}
                                             </CardContent>
@@ -265,14 +266,13 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
             <AlertDialog open={isDeleting} onOpenChange={setIsDeleting}>
                 <AlertDialogContent>
                     <AlertDialogHeader>
-                        <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+                        <AlertDialogTitle>{dict.challengeDetails.areYouSure}</AlertDialogTitle>
                         <AlertDialogDescription>
-                            This action cannot be undone. This will permanently delete the
-                            savings challenge and remove all associated data.
+                            {dict.challengeDetails.deleteConfirmation}
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogCancel>{dict.challengeDetails.cancel}</AlertDialogCancel>
                         <AlertDialogAction
                             onClick={handleDelete}
                             className="bg-red-600 hover:bg-red-700"
