@@ -1,5 +1,4 @@
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
+'use client'
 import { redirect } from 'next/navigation'
 import { Header } from '@/components/header'
 import { ChallengeDetails } from '@/components/challenge-details'
@@ -17,22 +16,11 @@ interface PageProps {
     }>;
 }
 
-export default async function ChallengePage({ params }: PageProps) {
+export default function ChallengePage({ params }: PageProps) {
     const { lang, id } = use(params);
     const { dictionary, error: dictionaryError } = useLocalization(lang);
     const { user, isLoading: authLoading } = useAuthentication();
     const [challenge, setChallenge] = useState()
-
-    if (authLoading || !dictionary || dictionaryError) {
-        return (
-            <LoadingSpinner />
-        );
-    }
-
-    if (!user) {
-        redirect('/')
-    }
-
 
     useEffect(() => {
         useGetChallengeById(id).then((challenge) => {
@@ -42,6 +30,18 @@ export default async function ChallengePage({ params }: PageProps) {
             setChallenge(challenge)
         })
     }, [id])
+
+    if (authLoading || !dictionary || dictionaryError) {
+        return (
+            <LoadingSpinner />
+        );
+    }
+
+
+    if (!user) {
+        redirect('/')
+    }
+
 
     return (
         <div className="min-h-screen flex flex-col bg-slate-100">

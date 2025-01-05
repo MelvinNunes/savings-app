@@ -102,7 +102,7 @@ export function EditChallengeForm({ challenge, onCancel, onSave, dict }: EditCha
                                 <RadioGroup value={type} onValueChange={(value: string) => setType(value as "incremental" | "fixed" | "custom")} className="grid gap-4">
                                     {challengesTypes(dict).map((challengeType) => (
                                         <div key={challengeType.id} className="flex items-start space-x-3">
-                                            <RadioGroupItem value={challengeType.name} id={challengeType.id} className="mt-1" />
+                                            <RadioGroupItem value={challengeType.id} id={challengeType.id} className="mt-1" />
                                             <Label htmlFor={challengeType.id} className="font-normal grid gap-1">
                                                 <div className="font-medium">{challengeType.name}</div>
                                                 <div className="text-sm text-muted-foreground">

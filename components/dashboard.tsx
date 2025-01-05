@@ -194,7 +194,7 @@ function Challenges({ dict, challenges, isLoading }: { dict: any, challenges: Sa
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: index * 0.1 }}
                     >
-                        <Link href={`#`}>
+                        <Link href={`/challenges/${challenge.id}`}>
                             <Card className="cursor-pointer transition-all hover:shadow-lg hover:-translate-y-1">
                                 <CardContent className="p-6">
                                     <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">

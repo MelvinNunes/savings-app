@@ -32,3 +32,12 @@ export async function useGetAllUserChallenges(userId: string) {
   }
   return data || [];
 }
+
+export async function useGetChallengeById(id: string) {
+  const { data: challenge } = await supabaseClient
+    .from("savings_challenges")
+    .select("*")
+    .eq("id", id)
+    .single();
+  return challenge;
+}
