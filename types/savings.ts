@@ -31,4 +31,5 @@ export const CURRENCIES: Currency[] = [
   { code: "GBP", symbol: "£", name: "British Pound" },
   { code: "ZAR", symbol: "R", name: "South African Rand" },
   { code: "AUD", symbol: "A$", name: "Australian Dollar" },
+  { code: "AOA", symbol: "Kz", name: "Kwanza" },
 ];
