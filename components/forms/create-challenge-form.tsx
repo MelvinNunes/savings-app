@@ -16,6 +16,7 @@ import { useCreateChallenge } from '@/data/challenges'
 import { useAtom } from 'jotai'
 import { addedChallengeCountAtom } from '@/atom/challenge-atoms'
 import { getUser } from '@/lib/auth'
+import { challengesTypes } from '@/types/savings'
 
 interface FormProps {
     dict: any
@@ -33,24 +34,6 @@ export function CreateChallengeForm({ dict }: FormProps) {
     const [, setAddedChallengeCount] = useAtom(addedChallengeCountAtom)
 
     const { createChallenge } = useCreateChallenge()
-
-    const CHALLENGE_TYPES = [
-        {
-            id: "incremental",
-            name: dict.challengeTypes.incremental.name,
-            description: dict.challengeTypes.incremental.description,
-        },
-        {
-            id: "fixed",
-            name: dict.challengeTypes.fixed.name,
-            description: dict.challengeTypes.fixed.description,
-        },
-        {
-            id: "custom",
-            name: dict.challengeTypes.custom.name,
-            description: dict.challengeTypes.custom.description,
-        },
-    ];
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
@@ -131,7 +114,7 @@ export function CreateChallengeForm({ dict }: FormProps) {
                             <div className="space-y-2">
                                 <Label>{dict.createChallenge.type}</Label>
                                 <RadioGroup value={type} onValueChange={setType} className="grid gap-4">
-                                    {CHALLENGE_TYPES.map((challengeType) => (
+                                    {challengesTypes(dict).map((challengeType) => (
                                         <div key={challengeType.id} className="flex items-start space-x-3">
                                             <RadioGroupItem value={challengeType.id} id={challengeType.id} className="mt-1" />
                                             <Label htmlFor={challengeType.id} className="font-normal grid gap-1">
