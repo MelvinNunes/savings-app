@@ -1,35 +1,84 @@
-import { forgotPasswordAction } from "@/app/actions";
-import { FormMessage, Message } from "@/components/form-message";
-import { SubmitButton } from "@/components/submit-button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import Link from "next/link";
+import { forgotPasswordAction } from "@/app/actions"
+import { FormMessage, Message } from "@/components/form-message"
+import { SubmitButton } from "@/components/submit-button"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Input } from "@/components/ui/input"
+import { Label } from "@/components/ui/label"
+import { ArrowLeft } from 'lucide-react'
+import Link from "next/link"
 
 export default async function ForgotPassword(props: {
-  searchParams: Promise<Message>;
+  searchParams: Promise<Message>
 }) {
-  const searchParams = await props.searchParams;
+  const searchParams = await props.searchParams
+
   return (
-    <>
-      <form className="flex-1 flex flex-col w-full gap-2 text-foreground [&>input]:mb-6 min-w-64 max-w-64 mx-auto">
-        <div>
-          <h1 className="text-2xl font-medium">Reset Password</h1>
-          <p className="text-sm text-secondary-foreground">
-            Already have an account?{" "}
-            <Link className="text-primary underline" href="/sign-in">
-              Sign in
-            </Link>
-          </p>
-        </div>
-        <div className="flex flex-col gap-2 [&>input]:mb-3 mt-8">
-          <Label htmlFor="email">Email</Label>
-          <Input name="email" placeholder="you@example.com" required />
-          <SubmitButton formAction={forgotPasswordAction}>
-            Reset Password
-          </SubmitButton>
-          <FormMessage message={searchParams} />
-        </div>
-      </form>
-    </>
-  );
+    <div className="container flex h-screen w-full flex-col items-center justify-center">
+      <Card className="w-full max-w-lg">
+        <CardHeader className="space-y-1">
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="-ml-2"
+              asChild
+            >
+              <Link href="/">
+                <ArrowLeft className="h-4 w-4" />
+                <span className="sr-only">Back to sign in</span>
+              </Link>
+            </Button>
+            <div>
+              <CardTitle className="text-2xl font-bold tracking-tight">
+                Reset Password
+              </CardTitle>
+              <CardDescription>
+                Enter your email address and we'll send you a link to reset your password
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <form className="space-y-4">
+            <div className="space-y-2">
+              <Label htmlFor="email">Email address</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="you@example.com"
+                required
+                autoComplete="email"
+                autoFocus
+                className="w-full"
+              />
+            </div>
+
+            <FormMessage message={searchParams} />
+
+            <div className="space-y-4">
+              <SubmitButton
+                formAction={forgotPasswordAction}
+                className="w-full bg-gradient-to-r from-violet-600 to-indigo-600 hover:from-violet-700 hover:to-indigo-700"
+              >
+                Send Reset Link
+              </SubmitButton>
+
+              <div className="text-center text-sm">
+                Remember your password?{" "}
+                <Link
+                  href="/sign-in"
+                  className="font-medium text-primary hover:underline"
+                >
+                  Sign in
+                </Link>
+              </div>
+            </div>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
+  )
 }
+

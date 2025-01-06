@@ -8,7 +8,8 @@
     "orContinueWith": "Or continue with",
     "email": "Email",
     "password": "Password",
-    "checkEmail": "Check your email for the confirmation link."
+    "checkEmail": "Check your email for the confirmation link.",
+    "forgotPassword": "Forgot your password?"
   },
   "header": {
     "navigation": {
