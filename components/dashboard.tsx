@@ -3,7 +3,7 @@
 import { Dispatch, ForwardRefExoticComponent, RefAttributes, SetStateAction, useState } from 'react'
 import { Card, CardContent } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Archive, ArrowUpRight, CheckCircle2, Clock, LucideProps, PlusCircle, TrendingUp, Wallet } from 'lucide-react'
+import { Archive, ArrowUpRight, CheckCircle2, Clock, LucideProps, Moon, PlusCircle, Sun, TrendingUp, Wallet } from 'lucide-react'
 import { resolveChallengeType, SavingsChallenge } from '@/types/savings'
 import { motion } from 'framer-motion'
 import { formatCurrency } from '@/utils/format-currency'
@@ -12,6 +12,7 @@ import { CURRENCIES } from '@/types/savings'
 import { Badge } from './ui/badge'
 import { Progress } from './ui/progress'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { ExportData } from './export-data'
 
 interface DashboardProps {
     dict: any
@@ -60,6 +61,7 @@ export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardPr
         <QueryClientProvider client={queryClient}>
             <div className="space-y-8">
                 <Header dict={dict} />
+                <ExportChallenges challenges={challenges} />
                 <Stats stats={stats} />
                 <Challenges dict={dict} challenges={challenges} isLoading={isLoadingChallenges} />
             </div>
@@ -93,6 +95,25 @@ function Header({ dict }: { dict: any }) {
             </div>
         </div>
 
+    )
+}
+
+
+function ExportChallenges({ challenges }: { challenges: SavingsChallenge[] }) {
+    return (
+        <div className="flex items-center justify-between">
+            <div className="space-y-1">
+                <h2 className="text-2xl font-semibold tracking-tight">
+                    Overview
+                </h2>
+                <p className="text-sm text-muted-foreground">
+                    Your savings progress and achievements
+                </p>
+            </div>
+            <div className="flex items-center gap-4">
+                <ExportData challenges={challenges} />
+            </div>
+        </div>
     )
 }
 
