@@ -68,7 +68,7 @@ export default async function ForgotPassword(props: {
               <div className="text-center text-sm">
                 Remember your password?{" "}
                 <Link
-                  href="/sign-in"
+                  href="/"
                   className="font-medium text-primary hover:underline"
                 >
                   Sign in

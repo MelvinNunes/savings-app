@@ -1,37 +1,39 @@
-import { resetPasswordAction } from "@/app/actions";
-import { FormMessage, Message } from "@/components/form-message";
-import { SubmitButton } from "@/components/submit-button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
+import { Message } from "@/components/form-message"
+import { ClientResetPasswordForm } from "@/components/forms/client-reset-password-form"
+
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { KeyRound } from "lucide-react"
+
 
 export default async function ResetPassword(props: {
-  searchParams: Promise<Message>;
+  searchParams: Promise<Message>
 }) {
-  const searchParams = await props.searchParams;
+  const searchParams = await props.searchParams
+
   return (
-    <form className="flex flex-col w-full max-w-md p-4 gap-2 [&>input]:mb-4">
-      <h1 className="text-2xl font-medium">Reset password</h1>
-      <p className="text-sm text-foreground/60">
-        Please enter your new password below.
-      </p>
-      <Label htmlFor="password">New password</Label>
-      <Input
-        type="password"
-        name="password"
-        placeholder="New password"
-        required
-      />
-      <Label htmlFor="confirmPassword">Confirm password</Label>
-      <Input
-        type="password"
-        name="confirmPassword"
-        placeholder="Confirm password"
-        required
-      />
-      <SubmitButton formAction={resetPasswordAction}>
-        Reset password
-      </SubmitButton>
-      <FormMessage message={searchParams} />
-    </form>
-  );
+    <div className="container flex h-screen w-full flex-col items-center justify-center">
+      <Card className="w-full max-w-lg">
+        <CardHeader className="space-y-1">
+          <div className="flex items-center gap-3">
+            <div className="rounded-full bg-primary/10 p-2 text-primary">
+              <KeyRound className="h-5 w-5" />
+            </div>
+            <div>
+              <CardTitle className="text-2xl font-bold tracking-tight">
+                Reset Password
+              </CardTitle>
+              <CardDescription>
+                Choose a new password for your account
+              </CardDescription>
+            </div>
+          </div>
+        </CardHeader>
+        <CardContent>
+          <ClientResetPasswordForm message={searchParams} />
+        </CardContent>
+      </Card>
+    </div>
+  )
 }
+
+
