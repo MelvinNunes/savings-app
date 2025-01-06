@@ -1,9 +1,9 @@
 'use client'
 
 import { Dispatch, ForwardRefExoticComponent, RefAttributes, SetStateAction, useState } from 'react'
-import { Card, CardContent } from '@/components/ui/card'
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
-import { Archive, ArrowUpRight, CheckCircle2, Clock, LucideProps, Moon, PlusCircle, Sun, TrendingUp, Wallet } from 'lucide-react'
+import { Archive, ArrowUpRight, Bell, CheckCircle2, Clock, LucideProps, Moon, PlusCircle, Sun, TrendingUp, Wallet } from 'lucide-react'
 import { resolveChallengeType, SavingsChallenge } from '@/types/savings'
 import { motion } from 'framer-motion'
 import { formatCurrency } from '@/utils/format-currency'
@@ -12,7 +12,10 @@ import { CURRENCIES } from '@/types/savings'
 import { Badge } from './ui/badge'
 import { Progress } from './ui/progress'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { Achievements } from './achievements'
 import { ExportData } from './export-data'
+import { Reminders } from './reminders'
+import { useRouter } from 'next/navigation'
 
 interface DashboardProps {
     dict: any
@@ -23,8 +26,6 @@ interface DashboardProps {
 const queryClient = new QueryClient()
 
 export function Dashboard({ challenges, dict, isLoadingChallenges }: DashboardProps) {
-    const [, setShowCreateDialog] = useState(false)
-
     const totalSaved = challenges.reduce((total, challenge) => {
         const challengeTotal = challenge.progress
             .filter(month => month.isCompleted)
@@ -100,8 +101,10 @@ function Header({ dict }: { dict: any }) {
 
 
 function ExportChallenges({ challenges }: { challenges: SavingsChallenge[] }) {
+    const router = useRouter()
+
     return (
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-5">
             <div className="space-y-1">
                 <h2 className="text-2xl font-semibold tracking-tight">
                     Overview
@@ -110,7 +113,16 @@ function ExportChallenges({ challenges }: { challenges: SavingsChallenge[] }) {
                     Your savings progress and achievements
                 </p>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-4">
+                <Button
+                    variant="outline"
+                    size="sm"
+                    className="gap-2"
+                    onClick={() => router.push("/achievements")}
+                >
+                    Achievements and Reminders
+                    <Bell className="h-4 w-4" />
+                </Button>
                 <ExportData challenges={challenges} />
             </div>
         </div>
