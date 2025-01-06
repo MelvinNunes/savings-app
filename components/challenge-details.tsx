@@ -11,7 +11,6 @@ import Link from 'next/link'
 import { CURRENCIES } from '@/types/savings'
 import { Badge } from './ui/badge'
 import { Progress } from './ui/progress'
-import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { useRouter } from 'next/navigation'
 import { Icons } from './icons'
 import { EditChallengeForm } from './forms/edit-challenge-form'
@@ -35,6 +34,7 @@ import {
 import { useArchiveChallenge, useDeleteChallenge, useUpdateChallengeProgress } from '@/data/challenges'
 import { InsightsCard } from './insights-card'
 import { calculateYearTotal } from '@/utils/calculate-savings'
+import { ShareProgress } from './share-progress'
 
 interface ChallengeDetailsProps {
     challenge: SavingsChallenge
@@ -151,6 +151,7 @@ export function ChallengeDetails({ challenge: initialChallenge, dict }: Challeng
                     </div>
                 </div>
                 <div className="flex items-center gap-2">
+                    <ShareProgress challenge={challenge} />
                     <Button
                         variant="outline"
                         className="gap-2"
