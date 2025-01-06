@@ -47,7 +47,7 @@ export default function Page({ params }: PageProps) {
 
     return (
         <div className="min-h-screen bg-slate-100 dark:bg-slate-900">
-            <Header view={'calculator'} isAuthenticated={!!user} dict={dictionary} lang={lang} />
+            <Header isAuthenticated={!!user} dict={dictionary} lang={lang} />
             <div className="container mx-auto px-4 py-10 space-y-8">
                 <div className="grid gap-6 md:grid-cols-2">
                     <Achievements challenges={userChallenges} />
